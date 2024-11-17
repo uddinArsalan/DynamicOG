@@ -3,7 +3,6 @@ import ogImage from './ogImage.route.js';
 import postRoute from './post.route.js';
 import uploadRoute from './upload.route.js';
 import authRouter from './auth.route.js';
-import errorHandler from '../middlewares/errorMiddleware.js';
 
 const router = Router();
 
@@ -31,7 +30,6 @@ defaultRoutes.forEach((route) => {
   router.use(route.path, route.route);
 });
 
-router.use(errorHandler)
 
 
 export default router;

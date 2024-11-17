@@ -22,17 +22,19 @@ export async function findUserById(id: string) {
   return await User.findById(id).select("-password -refreshToken");
 }
 
-export async function findByIdAndUpdate(id : string){
+export async function findByIdAndUpdate(id: string) {
   await User.findByIdAndUpdate(
     id,
     {
-      $set : {
-        refreshAccessToken : undefined
-      }
+      $set: {
+        refreshAccessToken: undefined,
+      },
     },
-    {new : true}
-  )
+    { new: true }
+  );
 }
+
+export async function createPost() {}
 
 export async function generateAccessAndRefreshToken(user: UserDocument) {
   try {
@@ -43,6 +45,8 @@ export async function generateAccessAndRefreshToken(user: UserDocument) {
     return { accessToken, refreshToken };
   } catch (error) {
     console.log(error);
-    throw new Error("Something went wrong while generating access and refresh token")
+    throw new Error(
+      "Something went wrong while generating access and refresh token"
+    );
   }
 }

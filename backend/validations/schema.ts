@@ -26,7 +26,4 @@ const loginSchema = vine.object({
 const registerValidator = vine.compile(registerSchema);
 const loginValidator = vine.compile(loginSchema);
 
-export {
-  registerValidator,
-  loginValidator
-}
+export { registerValidator, loginValidator };

@@ -14,7 +14,7 @@ export const registerUser = asyncHandler(
     const user = await authService.registerUser(name, email, password);
     return res
       .status(201)
-      .json(new ApiResponse(201, user, "User registered successfully"));
+      .json(new ApiResponse(201, { user }, "User registered successfully"));
   }
 );
 

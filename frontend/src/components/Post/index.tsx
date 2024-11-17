@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const PostPage = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [loading,setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -18,26 +18,29 @@ const PostPage = () => {
 
   const handleUploadAndGeneration = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     let imageUrl: string | null = null;
-  
+
     if (file) {
       const formData = new FormData();
       formData.append("optionalImage", file);
-  
+
       try {
-        setLoading(true)
+        setLoading(true);
         await toast.promise(
           async () => {
-            const uploadResponse = await fetch("http://localhost:3000/api/upload", {
-              method: "POST",
-              body: formData,
-            });
-  
+            const uploadResponse = await fetch(
+              "http://localhost:3000/api/upload",
+              {
+                method: "POST",
+                body: formData,
+              }
+            );
+
             if (!uploadResponse.ok) {
               throw new Error(`HTTP error! status: ${uploadResponse.status}`);
             }
-  
+
             imageUrl = await uploadResponse.text();
           },
           {
@@ -48,11 +51,11 @@ const PostPage = () => {
         );
       } catch (error) {
         console.error("Error uploading image:", error);
-        setLoading(false)
-        return; 
+        setLoading(false);
+        return;
       }
     }
-  
+
     try {
       await toast.promise(
         async () => {
@@ -70,11 +73,11 @@ const PostPage = () => {
               }),
             }
           );
-  
+
           if (!generateResponse.ok) {
             throw new Error(`HTTP error! status: ${generateResponse.status}`);
           }
-  
+
           const generateResult = await generateResponse.json();
           console.log("Generation successful:", generateResult);
         },
@@ -86,11 +89,10 @@ const PostPage = () => {
       );
     } catch (error) {
       console.error("Error generating content:", error);
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="bg-gray-950 text-white flex justify-center items-center px-4 py-16 min-h-screen">

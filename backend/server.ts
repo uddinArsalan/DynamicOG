@@ -4,7 +4,7 @@ import routes from "./routes/index.js";
 import connectDB from "./db/index.js";
 import "dotenv/config";
 import cors from "cors";
-import errorHandler from "./middlewares/errorMiddleware.js";
+import {errorHandler} from "./middlewares/errorMiddleware.js";
 
 const app = express();
 
