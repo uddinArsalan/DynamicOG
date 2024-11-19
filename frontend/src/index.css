@@ -35,46 +35,67 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%}
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
   .dark {
-    --background: 240 10% 3.9%;
+    /* Keeping the main dark background with a slight purple tinge */
+    --background: 250 10% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
+
+    /* Card and popover with deep purple undertones */
+    --card: 250 10% 3.9%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
+    --popover: 250 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
+
+    /* Primary colors */
+    --primary: 250 95% 65%; /* Vibrant purple */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary with purple tint */
+    --secondary: 250 15% 15.9%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
+
+    /* Muted purple tones */
+    --muted: 250 10% 15.9%;
+    --muted-foreground: 250 5% 64.9%;
+
+    /* Accent colors with purple */
+    --accent: 250 30% 20%;
     --accent-foreground: 0 0% 98%;
+
+    /* Keeping destructive red */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+
+    /* Border and input with purple undertones */
+    --border: 250 15% 15.9%;
+    --input: 250 15% 15.9%;
+    --ring: 250 95% 65%;
+
+    /* Chart colors */
+    --chart-1: 250 70% 50%; /* Purple */
+    --chart-2: 280 60% 45%; /* Deep Purple */
+    --chart-3: 220 80% 55%; /* Blue-Purple */
+    --chart-4: 300 65% 60%; /* Magenta-Purple */
+    --chart-5: 260 75% 55%; /* Violet */
+
+    /* Sidebar specific colors */
+    --sidebar-background: 250 15% 8%; /* Dark purple-tinted background */
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 250 95% 65%; /* Matching primary purple */
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%}
-}
-@layer base {
-  * {
-    @apply border-border;
+    --sidebar-accent: 250 30% 20%; /* Darker purple accent */
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 250 15% 15.9%;
+    --sidebar-ring: 250 95% 65%; /* Matching ring color */
   }
-  body {
-    @apply bg-background text-foreground;
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
   }
 }

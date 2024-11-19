@@ -2,6 +2,22 @@ import mongoose, { Schema } from "mongoose";
 
 const postSchema = new Schema(
   {
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    template_id: {
+      type: Schema.Types.ObjectId,
+      ref: "Templates",
+      required: true,
+    },
+    logo_url: {
+      type: String,
+    },
+    imageUrl: {
+      type: String,
+    },
     title: {
       type: String,
       required: true,
@@ -14,13 +30,8 @@ const postSchema = new Schema(
       trim: true,
       index: true,
     },
-    author: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-    ogImage: {
-      type: Schema.Types.ObjectId,
-      ref: "Image",
+    ogImageUrl: {
+      type: String,
     },
   },
   { timestamps: true }

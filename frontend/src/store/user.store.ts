@@ -18,13 +18,16 @@ export const useAuthStore = create<User>()(
   middlewares((set) => ({
     ...initialState,
     login: async ({ email, password }) => {
+      console.log({ email, password });
       set({ isLoading: true });
       try {
         const res = await userService.loginService({ email, password });
         const { name } = res.data.user;
+        console.log(res.data);
         set({ isLoading: false, error: false, name, email });
       } catch (err) {
         set({ isLoading: false, error: true, name: "", email: "" });
+        throw err;
       }
     },
     register: async ({ name, email, password }) => {
@@ -34,6 +37,7 @@ export const useAuthStore = create<User>()(
         set({ isLoading: false, error: false, name, email });
       } catch (err) {
         set({ isLoading: false, error: true, name: "", email: "" });
+        throw err;
       }
     },
     logout: async () => {

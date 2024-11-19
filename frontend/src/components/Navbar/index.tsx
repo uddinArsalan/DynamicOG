@@ -1,30 +1,69 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavMenu from "../NavMenu";
-// import { useAuthStore } from "@/store/user.store";
+import { ImageIcon } from "lucide-react";
 
 export default function Navbar() {
-  // const {} = useAuthStore()
+  const navItems = [
+    { label: "Documentation", href: "/docs" },
+    { label: "API", href: "/api" },
+    { label: "Pricing", href: "/pricing" },
+  ];
+
   return (
-    <nav className="bg-gray-950 text-white py-4 px-6 border-b">
-      <div className="flex justify-between items-center max-w-7xl mx-auto">
-        <div className="font-bold text-2xl">DynamicOg</div>
-        <div className="hidden md:block text-sm opacity-75">
-          Generate dynamic Open Graph images effortlessly
+    <nav className="fixed w-full z-50 border-b border-gray-700 bg-gray-900/90 backdrop-blur-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo and Brand */}
+          <div className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-2">
+              <div className="p-2 bg-purple-500 rounded-lg">
+                <ImageIcon className="h-5 w-5 text-white" />
+              </div>
+              <span className="font-bold text-xl text-gray-100">DynamicOg</span>
+            </Link>
+            <div className="hidden md:block h-6 w-px bg-gray-700" />
+            <p className="hidden md:block text-sm text-gray-300">
+              Generate dynamic Open Graph images effortlessly
+            </p>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <div className="flex space-x-6">
+              {navItems.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="text-sm text-gray-300 hover:text-purple-400 transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <Link to="/login">
+                <Button
+                  variant="ghost"
+                  className="text-gray-300 hover:text-purple-500 transition-colors"
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link to="/signup">
+                <Button className="bg-purple-600 hover:bg-purple-500 text-white transition-colors">
+                  Sign Up Free
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <NavMenu />
+          </div>
         </div>
-        <div className="hidden md:flex space-x-2">
-          <Button
-            asChild
-            variant="outline"
-            className="text-gray-950 hover:text-gray-950"
-          >
-            <Link to="/login">Login</Link>
-          </Button>
-          <Button asChild className="bg-white text-gray-950 hover:bg-gray-200">
-            <Link to="/signup">Sign Up</Link>
-          </Button>
-        </div>
-        <NavMenu />
       </div>
     </nav>
   );

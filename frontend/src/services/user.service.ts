@@ -11,6 +11,7 @@ const registerService = ({ name, email, password }: UserRegisterData) => {
 };
 
 const loginService = ({ email, password }: UserLoginData) => {
+  console.log(`${API_URL}/api/auth/login`);
   return axios.post(`${API_URL}/api/auth/login`, { email, password });
 };
 

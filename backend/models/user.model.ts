@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { SocialLinksType } from "../types/index.js";
 import {
   ACCESS_TOKEN_SECRET,
   ACCESS_TOKEN_EXPIRY,
@@ -12,6 +13,7 @@ interface IUser extends mongoose.Document {
   name: string;
   email: string;
   password: string;
+  socialLinks? : SocialLinksType
   refreshToken?: string;
 }
 
@@ -23,6 +25,17 @@ interface IUserMethods {
 
 export type UserModel = mongoose.Model<IUser, {}, IUserMethods>;
 export type UserDocument = mongoose.HydratedDocument<IUser, IUserMethods>;
+
+const socialLinksSchema = new mongoose.Schema({
+  platform : {
+    type : String,
+    enum : ['twitter','linkedin','reddit','threads'],
+    default : 'twitter'
+  },
+  url : {
+    type: String,
+  }
+})
 
 const userSchema = new mongoose.Schema<IUser, UserModel, IUserMethods>(
   {
@@ -48,6 +61,10 @@ const userSchema = new mongoose.Schema<IUser, UserModel, IUserMethods>(
     refreshToken: {
       type: String,
     },
+    socialLinks : {
+      type : [socialLinksSchema],
+      required : false
+    }
   },
   { timestamps: true }
 );

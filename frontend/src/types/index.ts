@@ -26,4 +26,13 @@ export type LoginErrorType =
     }>
   | undefined;
 
+export type RegisterErrorType =
+  | ZodError<{
+      name: string;
+      email: string;
+      password: string;
+    }>
+  | undefined;
+
 export type LoginFields = "email" | "password";
+export type RegisterFields = "name" | "email" | "password";

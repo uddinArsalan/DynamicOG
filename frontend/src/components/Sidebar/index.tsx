@@ -36,7 +36,7 @@ const DashboardSidebar = () => {
   const { pathname } = useLocation();
 
   return (
-    <Sidebar collapsible="icon" className="top-16 border-r lg:top-[70px]">
+    <Sidebar collapsible="icon" className="top-16 dark border-r lg:top-[64px]">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -44,12 +44,12 @@ const DashboardSidebar = () => {
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <LayoutDashboard className="size-4" />
               </div>
-              <span className="font-semibold">Dashboard</span>
+              <span className="font-semibold text-white">Dashboard</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="px-4">
         <SidebarMenu>
           {navItems.map((item) => (
             <SidebarMenuItem key={item.to}>
@@ -61,8 +61,8 @@ const DashboardSidebar = () => {
                       isActive={pathname === item.to}
                     >
                       <Link to={item.to}>
-                        <item.icon className="size-4" />
-                        <span>{item.label}</span>
+                        <item.icon className="size-4 text-white" />
+                        <span className="text-white">{item.label}</span>
                       </Link>
                     </SidebarMenuButton>
                   </TooltipTrigger>

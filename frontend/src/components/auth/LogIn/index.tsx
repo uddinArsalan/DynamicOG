@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/card";
 import { Github, Mail, Loader2 } from "lucide-react";
 import { useAuthStore } from "@/store/user.store";
-import {  UserLoginData } from "@/types";
+import { UserLoginData } from "@/types";
 import { loginSchema } from "@/schemas";
-import { parseFieldErrors } from "@/lib";
+import { parseLoginFieldErrors } from "@/lib";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState<UserLoginData>({
@@ -43,8 +43,8 @@ export default function LoginPage() {
     if (!success) {
       setErrors((prevError) => ({
         ...prevError,
-        emailError: parseFieldErrors(error, "email"),
-        passwordError: parseFieldErrors(error, "password"),
+        emailError: parseLoginFieldErrors(error, "email"),
+        passwordError: parseLoginFieldErrors(error, "password"),
       }));
       return;
     }
@@ -52,6 +52,7 @@ export default function LoginPage() {
     try {
       await login(data);
     } catch (err) {
+      console.log(err);
       setErrors((prevErrors) => ({
         ...prevErrors,
         emailError: ["Login failed. Please check your credentials."],
@@ -60,98 +61,100 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
-      <Card className="w-[350px]">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Sign in</CardTitle>
-          <CardDescription>
-            Enter your email and password to login
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className="grid grid-cols-2 gap-6">
-            <Button variant="outline">
-              <Github className="mr-2 h-4 w-4" />
-              Github
-            </Button>
-            <Button variant="outline">
-              <Mail className="mr-2 h-4 w-4" />
-              Google
-            </Button>
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4 relative">
+    <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent" />
+    <Card className="w-[400px] border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 text-transparent bg-clip-text">
+          Welcome back
+        </CardTitle>
+        <CardDescription className="text-gray-400">
+          Enter your email and password to login
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        <div className="grid grid-cols-2 gap-6">
+          <Button variant="outline" className="border-gray-700 hover:bg-gray-200">
+            <Github className="mr-2 h-4 w-4" />
+            Github
+          </Button>
+          <Button variant="outline" className="border-gray-700 hover:bg-gray-200">
+            <Mail className="mr-2 h-4 w-4" />
+            Google
+          </Button>
+        </div>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-gray-800" />
           </div>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-gray-900 px-2 text-gray-400">
+              Or continue with
+            </span>
           </div>
-          {/* autoCapitalize="none"
-                autoComplete="email"
-                autoCorrect="off" */}
-          <form onSubmit={onSubmit}>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="m@example.com"
-                onChange={handleChange}
-                disabled={isLoading}
-              />
-              {errors.emailError &&
-                errors.emailError.map((index, errMessage) => (
-                  <p
-                    key={index}
-                    className="text-sm text-red-600 mt-1"
-                    role="alert"
-                  >
-                    {errMessage}
-                  </p>
-                ))}
-            </div>
-            <div className="grid gap-2 mt-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                name="password"
-                disabled={isLoading}
-                onChange={handleChange}
-              />
-              {errors.passwordError &&
-                errors.passwordError.map((index, errMessage) => (
-                  <p
-                    key={index}
-                    className="text-sm text-red-600 mt-1"
-                    role="alert"
-                  >
-                    {errMessage}
-                  </p>
-                ))}
-            </div>
-            <Button className="w-full mt-4" type="submit" disabled={isLoading}>
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Sign In
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter>
-          <div className="text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Link
-              to="/signup"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Sign up
-            </Link>
+        </div>
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-gray-200">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              autoCapitalize="none"
+              autoComplete="email"
+              autoCorrect="off"
+              onChange={handleChange}
+              disabled={isLoading}
+              className="border-gray-800 bg-gray-900 focus:border-purple-500 focus:ring-purple-500/20"
+            />
+            {errors.emailError?.map((error, index) => (
+              <p key={index} className="text-sm text-red-400" role="alert">{error}</p>
+            ))}
           </div>
-        </CardFooter>
-      </Card>
-    </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="password" className="text-gray-200">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="***********"
+              onChange={handleChange}
+              disabled={isLoading}
+              className="border-gray-800 bg-gray-900 focus:border-purple-500 focus:ring-purple-500/20"
+            />
+            {errors.passwordError?.map((error, index) => (
+              <p key={index} className="text-sm text-red-400" role="alert">{error}</p>
+            ))}
+          </div>
+
+          <Button 
+            type="submit" 
+            disabled={isLoading}
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Signing in...
+              </>
+            ) : (
+              "Sign In"
+            )}
+          </Button>
+        </form>
+      </CardContent>
+      <CardFooter>
+        <div className="text-sm text-gray-400">
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            className="text-purple-400 hover:text-purple-300 underline underline-offset-4"
+          >
+            Sign up
+          </Link>
+        </div>
+      </CardFooter>
+    </Card>
+  </div>
   );
 }

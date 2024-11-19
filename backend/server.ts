@@ -4,22 +4,21 @@ import routes from "./routes/index.js";
 import connectDB from "./db/index.js";
 import "dotenv/config";
 import cors from "cors";
-import {errorHandler} from "./middlewares/errorMiddleware.js";
+import { errorHandler } from "./middlewares/errorMiddleware.js";
 
 const app = express();
 
 app.use(json());
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173",
-//   })
-// );
 app.use(
-  cors()
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
 );
 app.use(urlencoded({ extended: true }));
 app.use("/api", routes);
-app.use(errorHandler)
+app.use(errorHandler);
 
 connectDB()
   .then(() => {
