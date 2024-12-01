@@ -14,8 +14,9 @@ import {
 import { Github, Mail, Loader2 } from "lucide-react";
 import { UserRegisterData } from "@/types";
 import { signUpSchema } from "@/schemas";
-import { useAuthStore } from "@/store/user.store";
+import { useAuthStore } from "@/store/AuthStore";
 import { parseRegisterFieldErrors } from "@/lib";
+import axios from "axios";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState<UserRegisterData>({
@@ -35,7 +36,7 @@ export default function SignupPage() {
   const { isLoading, register } = useAuthStore();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(name,value)
+    console.log(name, value);
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
@@ -44,7 +45,7 @@ export default function SignupPage() {
     const { data, success, error } = await signUpSchema.safeParseAsync(
       formData
     );
-    console.log(data, success, error);
+    // console.log(data, success, error);
 
     if (!success) {
       setErrors((prevError) => ({
@@ -58,12 +59,20 @@ export default function SignupPage() {
 
     try {
       await register(data);
+      setErrors({
+        nameError: [],
+        emailError: [],
+        passwordError: [],
+      });
     } catch (err) {
-      console.log(err);
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        nameError: ["container"],
-      }));
+      if (axios.isAxiosError(err)) {
+        console.log(err?.response?.data.message);
+        setErrors(() => ({
+          emailError: [],
+          passwordError: [],
+          nameError: [err?.response?.data.message],
+        }));
+      }
     }
   }
 

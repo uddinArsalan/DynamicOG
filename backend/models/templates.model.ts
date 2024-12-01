@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 export const templatesSchema = new Schema(
   {
     user_id: {
@@ -10,8 +10,8 @@ export const templatesSchema = new Schema(
       default: "Untitled",
     },
     jsx: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     category: {
       type: String,
@@ -26,3 +26,5 @@ export const templatesSchema = new Schema(
   },
   { timestamps: true }
 );
+
+export const Templates = model("Templates", templatesSchema);

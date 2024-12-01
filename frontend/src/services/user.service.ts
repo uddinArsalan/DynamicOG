@@ -1,9 +1,8 @@
-import { API_URL } from "@/constants";
-import axios from "axios";
+import axios from "@/axios/axiosInstance";
 import { UserLoginData, UserRegisterData } from "@/types";
 
 const registerService = ({ name, email, password }: UserRegisterData) => {
-  return axios.post(`${API_URL}/api/auth/register`, {
+  return axios.post(`/auth/register`, {
     name,
     email,
     password,
@@ -11,12 +10,11 @@ const registerService = ({ name, email, password }: UserRegisterData) => {
 };
 
 const loginService = ({ email, password }: UserLoginData) => {
-  console.log(`${API_URL}/api/auth/login`);
-  return axios.post(`${API_URL}/api/auth/login`, { email, password });
+  return axios.post(`/auth/login`, { email, password });
 };
 
 const logoutService = () => {
-  return axios.post(`${API_URL}/api/auth/logout`);
+  return axios.post(`/auth/logout`);
 };
 
 export const userService = { loginService, registerService, logoutService };

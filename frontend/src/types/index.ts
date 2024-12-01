@@ -13,7 +13,7 @@ export interface User {
   email: string;
   error: boolean;
   isLoading: boolean;
-  success: boolean;
+  isLoggedIn: boolean;
   login: ({ email, password }: UserLoginData) => Promise<void>;
   register: ({ name, email, password }: UserRegisterData) => Promise<void>;
   logout: () => Promise<void>;

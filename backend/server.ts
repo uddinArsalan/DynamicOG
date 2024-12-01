@@ -4,6 +4,7 @@ import routes from "./routes/index.js";
 import connectDB from "./db/index.js";
 import "dotenv/config";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
 
 const app = express();
@@ -17,8 +18,10 @@ app.use(
   })
 );
 app.use(urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use("/api", routes);
 app.use(errorHandler);
+// app.use
 
 connectDB()
   .then(() => {

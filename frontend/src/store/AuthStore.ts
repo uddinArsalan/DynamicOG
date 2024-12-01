@@ -8,7 +8,7 @@ const initialState: Omit<User, "login" | "logout" | "register"> = {
   email: "",
   error: false,
   isLoading: false,
-  success: true,
+  isLoggedIn: false,
 };
 
 const middlewares = (cb: StateCreator<User>) =>
@@ -22,9 +22,11 @@ export const useAuthStore = create<User>()(
       set({ isLoading: true });
       try {
         const res = await userService.loginService({ email, password });
-        const { name } = res.data.user;
-        console.log(res.data);
-        set({ isLoading: false, error: false, name, email });
+        // console.log(res);
+        // console.log(res.data.data);
+        const { name } = res.data.data.user;
+        // console.log(res.data);
+        set({ isLoading: false,isLoggedIn : true, error: false, name, email });
       } catch (err) {
         set({ isLoading: false, error: true, name: "", email: "" });
         throw err;
