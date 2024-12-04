@@ -32,19 +32,21 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
     .json(new ApiResponse(200, { user }, "User logged in successfully"));
 });
 
-export async function refreshAccessToken(req: Request, res: Response) {
-  const incomingRefreshToken: string | undefined = req.cookies.refreshToken;
+export const refreshAccessToken = asyncHandler(
+  async (req: Request, res: Response) => {
+    const incomingRefreshToken: string | undefined = req.cookies.refreshToken;
 
-  const { accessToken, refreshToken } = await authService.refreshAccessToken(
-    incomingRefreshToken
-  );
+    const { accessToken, refreshToken } = await authService.refreshAccessToken(
+      incomingRefreshToken
+    );
 
-  return res
-    .status(200)
-    .cookie("acccessToken", accessToken, COOKIE_OPTIONS)
-    .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
-    .json(new ApiResponse(200, {}, "Access Token refreshed successfully"));
-}
+    return res
+      .status(200)
+      .cookie("acccessToken", accessToken, COOKIE_OPTIONS)
+      .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
+      .json(new ApiResponse(200, {}, "Access Token refreshed successfully"));
+  }
+);
 
 export const logout = asyncHandler(async (req: Request, res: Response) => {
   await authService.logoutUser(req.user._id);

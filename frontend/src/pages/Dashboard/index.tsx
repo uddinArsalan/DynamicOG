@@ -1,5 +1,4 @@
 import { Link, Outlet } from "react-router-dom";
-// import Navbar from "@/components/Navbar";
 import DashboardSidebar from "@/components/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarProvider } from "@/components/ui/sidebar";

@@ -8,12 +8,14 @@ export interface UserLoginData {
 export interface UserRegisterData extends UserLoginData {
   name: string;
 }
+
+export type UserBasicDetails = Omit<UserRegisterData,"password">
+
 export interface User {
-  name: string;
-  email: string;
-  error: boolean;
+  userInfo : UserBasicDetails | null
   isLoading: boolean;
   isLoggedIn: boolean;
+  setUserInfo : (userInfo : UserBasicDetails) => void;
   login: ({ email, password }: UserLoginData) => Promise<void>;
   register: ({ name, email, password }: UserRegisterData) => Promise<void>;
   logout: () => Promise<void>;

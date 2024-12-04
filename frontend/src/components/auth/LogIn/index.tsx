@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,6 +18,7 @@ import { loginSchema } from "@/schemas";
 import { parseLoginFieldErrors } from "@/lib";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<UserLoginData>({
     email: "",
     password: "",
@@ -55,6 +56,7 @@ export default function LoginPage() {
         emailError: [],
         passwordError: [],
       });
+      navigate("/", { replace: true });
     } catch (err) {
       console.log(err);
       setErrors((prevErrors) => ({

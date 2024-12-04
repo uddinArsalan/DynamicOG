@@ -6,11 +6,7 @@ import { useAuthStore } from "@/store/AuthStore";
 
 export default function Navbar() {
   const { isLoggedIn, logout } = useAuthStore();
-  const navItems = [
-    { label: "Dashboard", href: "/docs" },
-    // { label: "API", href: "/api" },
-    // { label: "Pricing", href: "/pricing" },
-  ];
+  const navItems = [{ label: "Dashboard", href: "/dashboard" }];
 
   return (
     <nav className="fixed w-full z-50 border-b border-gray-700 bg-gray-900/90 backdrop-blur-lg">

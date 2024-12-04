@@ -8,7 +8,7 @@ import Posts from "./components/Posts";
 import Profile from "./components/Profile";
 import LoginPage from "./components/auth/LogIn";
 import SignupPage from "./components/auth/SignUp";
-// import Layout from "./layout";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   const router = createBrowserRouter([
@@ -47,7 +47,9 @@ function App() {
   return (
     <React.Fragment>
       <AppProvider>
-        <RouterProvider router={router} />
+        <RequireAuth>
+          <RouterProvider router={router} />
+        </RequireAuth>
       </AppProvider>
     </React.Fragment>
   );
