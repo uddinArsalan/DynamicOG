@@ -1,0 +1,14 @@
+diff --git a/dist/react-jsx-parser.min.js b/dist/react-jsx-parser.min.js
+index 4c4dfc2fc0626aeadcfd8d392969e156cca75d5e..2f45db6c94399b3690aeccfa376201cf16ca513b 100644
+--- a/dist/react-jsx-parser.min.js
++++ b/dist/react-jsx-parser.min.js
+@@ -10888,7 +10888,8 @@ Parser.acorn = {
+ 
+ // source/components/JsxParser.tsx
+ var AcornJSX = __toESM(require_acorn_jsx(), 1);
+-import React, { Fragment } from "react";
++const React = require("react");
++const { Fragment } = React;
+ 
+ // source/constants/attributeNames.ts
+ var attributeNames_default = {

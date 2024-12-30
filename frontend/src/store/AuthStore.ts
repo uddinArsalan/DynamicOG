@@ -1,10 +1,10 @@
 import { User } from "@/types";
 import { create } from "zustand";
-import { userService } from "../services/user.service";
+import { userService } from "../services/user.services";
 
 const initialState: Omit<
   User,
-  "login" | "logout" | "register" | "setUserInfo"
+  "login" | "logout" | "register" | "setUserInfo" | "setLoggedIn"
 > = {
   userInfo: null,
   isLoading: false,
@@ -13,7 +13,8 @@ const initialState: Omit<
 
 export const useAuthStore = create<User>()((set) => ({
   ...initialState,
-  setUserInfo: (userInfo) => set({ userInfo, isLoggedIn: true }),
+  setUserInfo: (userInfo) => set({ userInfo }),
+  setLoggedIn: (status: boolean) => set({ isLoggedIn: status }),
   login: async ({ email, password }) => {
     set({ isLoading: true });
     try {

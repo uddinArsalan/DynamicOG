@@ -1,6 +1,8 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, Zoom } from "react-toastify";
+import { useAuthStore } from "@/store/AuthStore";
+import axiosInstance from "@/axios/axiosInstance";
 
 const AppContext = createContext({});
 
@@ -9,6 +11,24 @@ export function useApp() {
 }
 
 function AppProvider({ children }: { children: React.ReactNode }) {
+  const { setUserInfo, setLoggedIn } = useAuthStore();
+  useEffect(() => {
+    async function authenticateUser() {
+      try {
+        const { data } = await axiosInstance.get("/user");
+        console.log(data)
+        setUserInfo(data);
+        setLoggedIn(true);
+      } catch (error) {
+        setUserInfo(null);
+        setLoggedIn(false);
+        console.error("Error authenticating user:", error);
+      }
+    }
+
+    authenticateUser();
+  }, []);
+
   return (
     <AppContext.Provider value={{}}>
       {children}

@@ -1,22 +1,64 @@
-import { Card,CardHeader,CardTitle,CardContent } from "@/components/ui/card"
-const TemplatesSection = () => {
-    return (
-        <Card className="w-full max-w-4xl grid grid-cols-2">
-      <div
-        className="bg-cover bg-center"
-        style={{ backgroundImage: `url(./logo.png)` }}
-      ></div>
-      <div className="p-6">
-        <CardHeader className="flex items-center space-x-4">
-          <img src='./logo.png' alt="Logo" className="h-10 w-10" />
-          <CardTitle>Lorem ip</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-lg font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi voluptates odio deserunt temporibus voluptate id possimus asperiores esse optio consequatur, illo voluptas debitis.</p>
-        </CardContent>
-      </div>
-    </Card>
-    )
-}
+import { useTemplateStore } from "@/store/TemplatesStore";
+import { useEffect } from "react";
+import TemplatePreview from "../TemplatesPreview";
+import { templatesDefaultData } from "@/data";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
-export default TemplatesSection
+const TemplatesSection = () => {
+  const { loading, templates, getTemplates } = useTemplateStore();
+  useEffect(() => {
+    getTemplates();
+  }, []);
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2">
+      {templates.map((template, index) => (
+        <Card
+          key={index}
+          className="flex flex-col overflow-hidden transition-shadow hover:shadow-lg"
+        >
+          <CardContent className="flex-grow p-0">
+            <TemplatePreview
+              imageUrl={templatesDefaultData.imageUrl}
+              content={templatesDefaultData.content}
+              jsxString={template.jsx}
+              logoUrl={templatesDefaultData.logoUrl}
+              title={templatesDefaultData.title}
+            />
+          </CardContent>
+          <CardFooter className="flex flex-wrap items-center gap-2 p-4 bg-white">
+            <div className="flex flex-wrap gap-1 mr-auto">
+              {template.category.map((cat) => (
+                <Badge
+                  key={cat}
+                  variant="secondary"
+                  className="bg-gray-100 text-gray-800 text-xs"
+                >
+                  {cat}
+                </Badge>
+              ))}
+              {template.isDefault && (
+                <Badge
+                  variant="default"
+                  className="bg-blue-500 text-white text-xs"
+                >
+                  Default
+                </Badge>
+              )}
+            </div>
+            <h3 className="font-medium text-sm text-gray-900 w-full mt-2">
+              {template.name}
+            </h3>
+          </CardFooter>
+        </Card>
+      ))}
+    </div>
+  );
+};
+
+export default TemplatesSection;

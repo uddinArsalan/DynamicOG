@@ -2,7 +2,9 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.post('/post', ()=> {});
-router.post('/post/:id', ()=> {});
+router.get('/', ()=> {});
+router.get('/:id', ()=> {});
+router.post('/', ()=> {});
+router.post('/:id', ()=> {});
 
 export default router;

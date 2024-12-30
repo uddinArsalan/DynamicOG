@@ -1,177 +1,249 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "../ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Template } from "@/types";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import axios from "@/axios/axiosInstance";
 
-const PostPage = () => {
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+interface PostProps {
+  title: string;
+  templates: Template[];
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
+  setLogoUrl: React.Dispatch<React.SetStateAction<string>>;
+  imageUrl: string;
+  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedTemplate: React.Dispatch<React.SetStateAction<Template | null>>;
+  selectedTemplate: Template | null;
+  updateOgImageUrl : (url : string) => void
+}
+
+const PostPage: React.FC<PostProps> = ({
+  title,
+  templates,
+  setTitle,
+  content,
+  setContent,
+  setLogoUrl,
+  setImageUrl,
+  setSelectedTemplate,
+  selectedTemplate,
+  updateOgImageUrl
+}) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [file, setFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imgFile, setImgFile] = useState<File | null>(null);
+  const [logoFile, setLogoFile] = useState<File | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setFile(file);
-      setImagePreview(URL.createObjectURL(file));
+      setImgFile(file);
+      setImageUrl(URL.createObjectURL(file));
+    }
+  };
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setLogoFile(file);
+      setLogoUrl(URL.createObjectURL(file));
     }
   };
 
   const handleUploadAndGeneration = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    let imageUrl: string | null = null;
+    let imageUrlRes: string | null = null;
+    let logoUrlRes: string | null = null;
 
-    if (file) {
+    const uploadFiles = async (files: { [key: string]: File }) => {
       const formData = new FormData();
-      formData.append("optionalImage", file);
-
-      try {
-        setLoading(true);
-        await toast.promise(
-          async () => {
-            const uploadResponse = await fetch(
-              "http://localhost:3000/api/upload",
-              {
-                method: "POST",
-                body: formData,
-              }
-            );
-
-            if (!uploadResponse.ok) {
-              throw new Error(`HTTP error! status: ${uploadResponse.status}`);
-            }
-
-            imageUrl = await uploadResponse.text();
-          },
-          {
-            pending: "Uploading your image... Please wait.",
-            success: "Image uploaded successfully! 🎉",
-            error: "Failed to upload the image. Please try again. ⚠️",
-          }
-        );
-      } catch (error) {
-        console.error("Error uploading image:", error);
-        setLoading(false);
-        return;
+      for (const [fieldName, file] of Object.entries(files)) {
+        formData.append(fieldName, file);
       }
-    }
+    
+      const uploadResponse = await axios.post(
+        "/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+    
+      if (uploadResponse.status !== 200) {
+        throw new Error(`HTTP error! status: ${uploadResponse.status}`);
+      }
+      return uploadResponse.data.data.uploadResults;
+    };
 
     try {
+      setLoading(true);
+      const filesToUpload: { [key: string]: File } = {};
+      if (imgFile) filesToUpload["bgImage"] = imgFile;
+      if (logoFile) filesToUpload["logoImage"] = logoFile;
+      const uploadResults = await toast.promise(
+        () => uploadFiles(filesToUpload),
+        {
+          pending: "Uploading files...",
+          success: "Files uploaded successfully! 🎉",
+          error: "File upload failed. ⚠️",
+        }
+      );
+    
+      imageUrlRes = uploadResults.bgImage || null;
+      logoUrlRes = uploadResults.logoImage || null;
+
       await toast.promise(
         async () => {
-          const generateResponse = await fetch(
-            "http://localhost:3000/api/og/generate",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                title,
-                content,
-                imageUrl,
-              }),
-            }
-          );
+          const generateResponse = await axios.post("/og/generate", {
+            selectedTemplateId : selectedTemplate?._id,
+            title,
+            content,
+            imageUrl: imageUrlRes,
+            logoUrl: logoUrlRes,
+          });
 
-          if (!generateResponse.ok) {
+          if (!(generateResponse.statusText == "OK")) {
             throw new Error(`HTTP error! status: ${generateResponse.status}`);
           }
 
-          const generateResult = await generateResponse.json();
-          console.log("Generation successful:", generateResult);
+          const ogImageUrl = generateResponse.data.data.ogImageUrl;
+          updateOgImageUrl(ogImageUrl)
+          console.log("Generation successful:", ogImageUrl);
         },
         {
-          pending: "Generating your Open Graph image... Please wait.",
-          success: "OG image generated successfully! 🎉",
-          error: "Failed to generate OG image. Please try again. ⚠️",
+          pending: "Generating OG image...🎉",
+          success: "OG image generated!",
+          error: "OG generation failed.  ⚠️",
         }
       );
     } catch (error) {
-      console.error("Error generating content:", error);
+      console.error("Error during upload or generation:", error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="bg-gray-950 text-white flex justify-center items-center px-4 py-16 min-h-screen">
-      <form
-        onSubmit={handleUploadAndGeneration}
-        encType="multipart/form-data"
-        className="flex flex-col gap-6 p-8 w-full max-w-2xl bg-gray-800 rounded-lg shadow-lg"
-      >
-        <h1 className="text-3xl font-bold mb-2">Create a New Post</h1>
-        <p className="text-gray-400 mb-6">
+    <Card className="w-full max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle>Create a New OG Image</CardTitle>
+        <CardDescription>
           DynamicOg is a tool for generating dynamic Open Graph images based on
           post content. Use the form below to create a new post and generate a
           unique OG image automatically.
-        </p>
-        <div className="flex flex-col mb-4">
-          <label className="text-xl mb-2" htmlFor="title">
-            Title:
-          </label>
-          <input
-            id="title"
-            type="text"
-            value={title}
-            name="title"
-            onChange={(e) => setTitle(e.currentTarget.value)}
-            className="px-4 py-2 bg-gray-700 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter the title of your post"
-          />
-        </div>
-        <div className="flex flex-col mb-4">
-          <label className="text-xl mb-2" htmlFor="content">
-            Description:
-          </label>
-          <textarea
-            id="content"
-            value={content}
-            name="content"
-            onChange={(e) => setContent(e.currentTarget.value)}
-            className="px-4 py-2 bg-gray-700 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows={4}
-            placeholder="Enter the description of your post"
-          />
-        </div>
-        <div className="flex flex-col mb-4">
-          <div className="text-xl mb-2">Add an Image (Optional):</div>
-          <div className="flex items-center">
-            <label
-              className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md cursor-pointer flex items-center"
-              htmlFor="optionalImage"
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleUploadAndGeneration} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="template">Template</Label>
+            <Select
+              onValueChange={(name: string) =>
+                setSelectedTemplate(
+                  templates.find((t) => t.name === name) || null
+                )
+              }
             >
-              <input
+              <SelectTrigger>
+                <SelectValue placeholder="Select a template" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Templates</SelectLabel>
+                  {templates.map((template) => (
+                    <SelectItem key={template._id} value={template.name}>
+                      {template.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Label htmlFor="title">Title</Label>
+            <Input
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter the title of your post"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="content">Description</Label>
+            <Textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Enter the description of your post"
+              rows={4}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="bgImage">Background Image</Label>
+            <Input
+              id="bgImage"
+              name="bgImage"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="logoImage">Logo (Optional)</Label>
+            <Input
+              id="logoImage"
+              name="logoImage"
+              type="file"
+              accept="image/*"
+              onChange={handleLogoChange}
+            />
+          </div>
+          {/* <div className="space-y-2">
+            <Label htmlFor="optionalImage">Upload Image (Optional)</Label>
+            <div className="flex items-center space-x-4">
+              <Input
                 id="optionalImage"
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="hidden"
-                name="optionalImage"
               />
-              Choose File
-            </label>
-            {imagePreview && (
-              <div className="ml-4">
+              {imageUrl && (
                 <img
-                  src={imagePreview}
+                  src={imageUrl}
                   alt="Preview"
-                  className="rounded-md border border-gray-700 h-20"
+                  width={80}
+                  height={80}
+                  className="rounded-md object-cover"
                 />
-              </div>
-            )}
-          </div>
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-md"
-          disabled={loading}
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+              )}
+            </div>
+          </div> */}
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading ? "Generating..." : "Generate OG Image"}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 

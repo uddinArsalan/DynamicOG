@@ -19,17 +19,16 @@ import {
   Clipboard,
   User2,
   LayoutDashboard,
-  Settings,
+  Monitor,
   LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  // { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/dashboard/templates", label: "Templates", icon: Edit3 },
   { to: "/dashboard/posts", label: "Posts", icon: Clipboard },
   { to: "/dashboard/profile", label: "Profile", icon: User2 },
-  { to: "/dashboard/settings", label: "Settings", icon: Settings },
+  { to: "/dashboard/generate", label: "Generate OG Image", icon: Monitor },
 ];
 
 const DashboardSidebar = () => {

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { registerValidator, loginValidator } from "../validations/schema.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { authService } from "../services/authService.js";
+import { authService } from "../services/AuthService.js";
 import { COOKIE_OPTIONS } from "../config/cookieConfig.js";
 
 export const registerUser = asyncHandler(
@@ -42,7 +42,7 @@ export const refreshAccessToken = asyncHandler(
 
     return res
       .status(200)
-      .cookie("acccessToken", accessToken, COOKIE_OPTIONS)
+      .cookie("accessToken", accessToken, COOKIE_OPTIONS)
       .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
       .json(new ApiResponse(200, {}, "Access Token refreshed successfully"));
   }

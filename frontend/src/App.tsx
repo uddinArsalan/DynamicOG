@@ -8,7 +8,7 @@ import Posts from "./components/Posts";
 import Profile from "./components/Profile";
 import LoginPage from "./components/auth/LogIn";
 import SignupPage from "./components/auth/SignUp";
-import RequireAuth from "./components/RequireAuth";
+import { OGImageGenerator } from "./components/OGImageGenerator";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +23,10 @@ function App() {
         {
           path: "templates",
           element: <TemplatesSection />,
+        },
+        {
+          path: "generate",
+          element: <OGImageGenerator />,
         },
         {
           path: "posts",
@@ -47,9 +51,7 @@ function App() {
   return (
     <React.Fragment>
       <AppProvider>
-        <RequireAuth>
           <RouterProvider router={router} />
-        </RequireAuth>
       </AppProvider>
     </React.Fragment>
   );

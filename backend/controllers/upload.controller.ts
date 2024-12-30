@@ -1,31 +1,44 @@
 import { Request, Response } from "express";
 import { cloudinaryUploadImage } from "../utils/cloudinaryUtils.js";
 import { unlinkSync, existsSync } from "fs";
-// import path from "path";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+export const uploadFileController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    const uploadResults: { [key: string]: string | undefined } = {};
+    try {
+      for (const [fieldName, fileArray] of Object.entries(files)) {
+        const file = fileArray[0];
+        if (file) {
+          const fileUrlPath = file.path;
+          const secure_url = await cloudinaryUploadImage(
+            fileUrlPath,
+            "temp-images"
+          );
+          uploadResults[fieldName] = secure_url;
 
-export const uploadFileController = async (req: Request, res: Response) => {
-  let fileUrlPath: string | undefined;
+          unlinkSync(fileUrlPath);
+        }
+      }
 
-  try {
-    if (!req.file) {
-      return res.status(400).send("No file uploaded.");
+      return res
+        .status(200)
+        .json(
+          new ApiResponse(201, {uploadResults}, "Files uploaded to cloudinary")
+        );
+    } catch (error) {
+      // Delete any remaining files from the server
+      for (const fileArray of Object.values(files)) {
+        const file = fileArray[0];
+        if (file && existsSync(file.path)) {
+          unlinkSync(file.path);
+        }
+      }
+
+      console.error("Error uploading files:", error);
+      throw new ApiError(500, "An error occurred during file upload.");
     }
-    // fileUrlPath = path.join('./public/temp-images', req.file.filename);
-    fileUrlPath = req.file.path;
-    
-    const secure_url = await cloudinaryUploadImage(fileUrlPath, "temp-images");
-
-    // Once the file is uploaded, delete it from server
-    unlinkSync(fileUrlPath);
-
-    return res.status(200).json(secure_url);
-  } catch (error) {
-    // Delete the file from the server if it exists
-    if (fileUrlPath && existsSync(fileUrlPath)) {
-      unlinkSync(fileUrlPath);
-    }
-
-    console.error("Error uploading file:", error);
-    return res.status(500).send("An error occurred during file upload.");
   }
-};
+);

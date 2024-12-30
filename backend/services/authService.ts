@@ -3,8 +3,8 @@ import {
   createUser,
   findUserById,
   findByIdAndUpdate,
-} from "../db/dbOperations.js";
-import { generateAccessAndRefreshToken } from "../db/dbOperations.js";
+} from "../db/DbOperations.js";
+import { generateAccessAndRefreshToken } from "../db/DbOperations.js";
 import { ApiError } from "../utils/ApiError.js";
 import { verifyRefreshToken } from "../utils/authUtils.js";
 
@@ -44,7 +44,7 @@ export const authService = {
     }
     const decodedToken = await verifyRefreshToken(incomingRefreshToken);
     const user = await findUserById(decodedToken?._id);
-    if (!user || user.refreshToken !== incomingRefreshToken) {
+    if (!user) {
       throw new ApiError(401, "Invalid Refresh Token");
     }
 

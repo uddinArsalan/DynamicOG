@@ -18,3 +18,4 @@ export const parseRegisterFieldErrors = (
 ) => {
   return error?.format()?.[field]?._errors || [];
 };
+

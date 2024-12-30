@@ -1,4 +1,8 @@
+import { Post } from "../models/post.model.js";
 import { User, UserDocument } from "../models/user.model.js";
+import { PostType } from "../types/index.js";
+import { Templates } from "../models/templates.model.js";
+import { ApiError } from "../utils/ApiError.js";
 
 interface UserPayloadType {
   name: string;
@@ -34,7 +38,24 @@ export async function findByIdAndUpdate(id: string) {
   );
 }
 
-export async function createPost() {}
+export async function createPost(postDetails: PostType) {
+  return await Post.create(postDetails);
+}
+
+
+export async function getUserTemplates(userId: string | null) {
+  return await Templates.find({
+    $or: [{ user_id: userId }, { isDefault: true }],
+  });
+}
+
+export async function getTemplateJSX(templateId: string) : Promise<string> {
+  const template = await Templates.findById(templateId).select("jsx");
+  if(!template){
+    throw new ApiError(404,"Invalid Template Id")
+  }
+  return template.jsx
+}
 
 export async function generateAccessAndRefreshToken(user: UserDocument) {
   try {

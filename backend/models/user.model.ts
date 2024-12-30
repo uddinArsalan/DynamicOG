@@ -30,7 +30,7 @@ const socialLinksSchema = new mongoose.Schema({
   platform : {
     type : String,
     enum : ['twitter','linkedin','reddit','threads'],
-    default : 'twitter'
+    // default : 'twitter'
   },
   url : {
     type: String,

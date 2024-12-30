@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
+    "target": "es2020",
+    "module": "es2020",
+    "moduleResolution": "node10",
     "outDir": "./dist",
     "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["./**/*.ts", "utils/htmlTemplates.tsx"],
+  "include": ["./**/*.ts", "./**/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }
 

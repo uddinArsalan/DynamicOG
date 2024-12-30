@@ -1,20 +1,50 @@
-import { generate } from '../services/ogImageGenerator.js';
-import { save } from '../services/imageStorage.js';
-import { Request, Response } from 'express';
+import { generate } from "../services/OgImageGenerator.js";
+import { saveAndUpload } from "../services/ImageStorage.js";
+import { Request, Response } from "express";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
-export async function generateOGImage(req: Request, res: Response) {
-  try {
-    const { title, content, imageUrl } = req.body;
+export const generateOGImage = asyncHandler(
+  async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        throw new ApiError(404, "User not authenticated");
+      }
+      const { selectedTemplateId, title, content, imageUrl, logoUrl } =
+        req.body;
 
-    if (typeof title !== 'string' || typeof content !== 'string') {
-      return res.status(400).json({ error: 'Invalid title or content' });
+      if (typeof title !== "string" || typeof content !== "string") {
+        throw new ApiError(400, "Invalid title or content");
+      }
+
+      const image = await generate(
+        selectedTemplateId,
+        title,
+        content,
+        imageUrl,
+        logoUrl
+      );
+      const userId = req.user._id;
+      const ogImageUrl = await saveAndUpload({
+        image,
+        author: userId,
+        template_id: selectedTemplateId,
+        title,
+        content,
+        imageUrl,
+        logo_url: logoUrl,
+        ogImageUrl: undefined,
+      });
+      return res.json(
+        new ApiResponse(200, { ogImageUrl }, "OG Image generated")
+      );
+    } catch (error) {
+      console.error("Error generating OG image:", error);
+      res.status(500).json({
+        error:
+          error instanceof Error ? error.message : "An unknown error occurred",
+      });
     }
-
-    const image = await generate(title, content, imageUrl);
-    const ogImageUrl = await save(image);
-    res.json({ ogImageUrl });
-  } catch (error) {
-    console.error('Error generating OG image:', error);
-    res.status(500).json({ error: error instanceof Error ? error.message : 'An unknown error occurred' });
   }
-}
+);

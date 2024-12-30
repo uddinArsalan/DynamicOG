@@ -6,6 +6,7 @@ import "dotenv/config";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
+// import { feedTemplatesModel } from "./scripts/index.js";
 
 const app = express();
 
@@ -21,12 +22,12 @@ app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api", routes);
 app.use(errorHandler);
-// app.use
 
 connectDB()
   .then(() => {
     app.listen(config.port, () => {
       console.log(`Server running on port ${config.port}`);
+      // feedTemplatesModel()
     });
   })
   .catch((error) => {

@@ -1,9 +1,10 @@
 import { Router } from "express";
-import ogImage from "./ogImage.route.js";
+import ogImage from "./OgImage.route.js";
 import postRoute from "./post.route.js";
 import uploadRoute from "./upload.route.js";
 import authRouter from "./auth.route.js";
 import userRouter from "./user.route.js";
+import templatesRouter from "./templates.route.js";
 
 const router = Router();
 
@@ -13,7 +14,7 @@ const defaultRoutes = [
     route: ogImage,
   },
   {
-    path: "/createPost",
+    path: "/post",
     route: postRoute,
   },
   {
@@ -27,6 +28,10 @@ const defaultRoutes = [
   {
     path: "/user",
     route: userRouter,
+  },
+  {
+    path: "/template",
+    route: templatesRouter,
   },
 ];
 
