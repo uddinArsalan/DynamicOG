@@ -24,19 +24,19 @@ export const OgImageTemplate = ({
       imageUrl,
       logoUrl,
     }}
-    components={{
-      div: ({ style, ...rest }: React.HTMLAttributes<HTMLDivElement>) => (
-        <div
-          style={{
-            ...style,
-            backgroundImage: style?.backgroundImage
-              ? `url(${imageUrl})`
-              : undefined,
-          }}
-          {...rest}
-        />
-      ),
-    }}
+    // components={{
+    //   div: ({ style, ...rest }: React.HTMLAttributes<HTMLDivElement>) => (
+    //     <div
+    //       style={{
+    //         ...style,
+    //         backgroundImage: style?.backgroundImage
+    //           ? `url(${imageUrl})`
+    //           : undefined,
+    //       }}
+    //       {...rest}
+    //     />
+    //   ),
+    // }}
     renderInWrapper={false}
   />
 );

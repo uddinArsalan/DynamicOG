@@ -4,6 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { authService } from "../services/AuthService.js";
 import { COOKIE_OPTIONS } from "../config/cookieConfig.js";
+import { ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_EXPIRY } from "../constants.js";
 
 export const registerUser = asyncHandler(
   async (req: Request, res: Response) => {
@@ -27,8 +28,14 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
   );
   return res
     .status(200)
-    .cookie("accessToken", accessToken, COOKIE_OPTIONS)
-    .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
+    .cookie("accessToken", accessToken, {
+      ...COOKIE_OPTIONS,
+      maxAge: 1 * 60 * 60 * 1000,
+    })
+    .cookie("refreshToken", refreshToken, {
+      ...COOKIE_OPTIONS,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
     .json(new ApiResponse(200, { user }, "User logged in successfully"));
 });
 
@@ -42,8 +49,14 @@ export const refreshAccessToken = asyncHandler(
 
     return res
       .status(200)
-      .cookie("accessToken", accessToken, COOKIE_OPTIONS)
-      .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
+      .cookie("accessToken", accessToken, {
+        ...COOKIE_OPTIONS,
+        maxAge: 1 * 60 * 60 * 1000,
+      })
+      .cookie("refreshToken", refreshToken, {
+        ...COOKIE_OPTIONS,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
       .json(new ApiResponse(200, {}, "Access Token refreshed successfully"));
   }
 );

@@ -10,12 +10,12 @@ import { Button } from "@/components/ui/button";
 
 const Posts = () => {
   const { getTemplates, templates } = useTemplateStore();
-  const [title, setTitle] = useState<string>(templatesDefaultData.title);
-  const [content, setContent] = useState<string>(templatesDefaultData.content);
+  const [title, setTitle] = useState<string>(templatesDefaultData[0].title);
+  const [content, setContent] = useState<string>(templatesDefaultData[0].content);
   const [imageUrl, setImageUrl] = useState<string>(
-    templatesDefaultData.imageUrl
+    templatesDefaultData[0].imageUrl
   );
-  const [logoUrl, setLogoUrl] = useState<string>(templatesDefaultData.logoUrl);
+  const [logoUrl, setLogoUrl] = useState<string>(templatesDefaultData[0].logoUrl);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
     null
   );

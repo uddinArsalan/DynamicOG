@@ -24,11 +24,11 @@ const TemplatesSection = () => {
         >
           <CardContent className="flex-grow p-0">
             <TemplatePreview
-              imageUrl={templatesDefaultData.imageUrl}
-              content={templatesDefaultData.content}
+              imageUrl={templatesDefaultData[index].imageUrl}
+              content={templatesDefaultData[index].content}
               jsxString={template.jsx}
-              logoUrl={templatesDefaultData.logoUrl}
-              title={templatesDefaultData.title}
+              logoUrl={templatesDefaultData[index].logoUrl}
+              title={templatesDefaultData[index].title}
             />
           </CardContent>
           <CardFooter className="flex flex-wrap items-center gap-2 p-4 bg-white">
