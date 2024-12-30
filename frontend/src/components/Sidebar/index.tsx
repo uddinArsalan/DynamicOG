@@ -26,9 +26,9 @@ import { Button } from "@/components/ui/button";
 
 const navItems = [
   { to: "/dashboard/templates", label: "Templates", icon: Edit3 },
-  { to: "/dashboard/posts", label: "Posts", icon: Clipboard },
-  { to: "/dashboard/profile", label: "Profile", icon: User2 },
   { to: "/dashboard/generate", label: "Generate OG Image", icon: Monitor },
+  { to: "/dashboard/posts", label: "All User OG Posts", icon: Clipboard },
+  { to: "/dashboard/profile", label: "Profile", icon: User2 }
 ];
 
 const DashboardSidebar = () => {

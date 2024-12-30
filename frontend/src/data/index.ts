@@ -9,6 +9,14 @@ export const templatesDefaultData = [
       "Discover the power of modern frameworks and tools to build scalable applications.",
   },
   {
+    logoUrl: "https://cdn.worldvectorlogo.com/logos/twitter-6.svg",
+    imageUrl:
+      "https://images.pexels.com/photos/1181676/pexels-photo-1181676.jpeg?auto=compress&cs=tinysrgb&w=1200&h=675&dpr=1",
+    title: "Tech Trends 2024",
+    content:
+      "Stay ahead of the curve with the latest tech trends. From AI and machine learning to blockchain and IoT, explore the technologies shaping our future. #TechTrends #Innovation",
+  },
+  {
     logoUrl: "https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg",
     imageUrl:
       "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&dpr=1",
@@ -23,13 +31,5 @@ export const templatesDefaultData = [
     title: "Networking in Tech",
     content:
       "Expand your professional network and discover new opportunities in the ever-evolving tech industry. Learn strategies for effective networking and personal branding.",
-  },
-  {
-    logoUrl: "https://cdn.worldvectorlogo.com/logos/twitter-6.svg",
-    imageUrl:
-      "https://images.pexels.com/photos/1181676/pexels-photo-1181676.jpeg?auto=compress&cs=tinysrgb&w=1200&h=675&dpr=1",
-    title: "Tech Trends 2024",
-    content:
-      "Stay ahead of the curve with the latest tech trends. From AI and machine learning to blockchain and IoT, explore the technologies shaping our future. #TechTrends #Innovation",
   },
 ];

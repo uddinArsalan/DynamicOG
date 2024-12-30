@@ -3,12 +3,12 @@ import AppProvider from "./contexts/AppProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import TemplatesSection from "./components/TemplatesSection";
-import Posts from "./components/Posts";
-import Profile from "./components/Profile";
+import TemplatesSection from "./pages/TemplatesSection";
+import UserOGPosts from "./pages/UserOGPosts";
+import Profile from "./pages/Profile";
 import LoginPage from "./components/auth/LogIn";
 import SignupPage from "./components/auth/SignUp";
-import { OGImageGenerator } from "./components/OGImageGenerator";
+import OGImageGenerator from "./pages/OGImageGenerator";
 
 function App() {
   const router = createBrowserRouter([
@@ -30,7 +30,7 @@ function App() {
         },
         {
           path: "posts",
-          element: <Posts />,
+          element: <UserOGPosts />,
         },
         {
           path: "profile",

@@ -1,6 +1,6 @@
 import { useTemplateStore } from "@/store/TemplatesStore";
 import { useEffect } from "react";
-import TemplatePreview from "../TemplatesPreview";
+import TemplatePreview from "../../components/TemplatesPreview";
 import { templatesDefaultData } from "@/data";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";

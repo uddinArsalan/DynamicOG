@@ -49,3 +49,10 @@ export interface Template {
   isDefault: boolean;
   jsx: string;
 }
+
+type PLATFORM = 'twitter'| 'linkedin'|'reddit'|'threads'
+
+export interface SocialLinksType{
+  platform : PLATFORM,
+  url : string
+}
