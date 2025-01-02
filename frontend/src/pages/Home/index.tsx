@@ -1,61 +1,17 @@
-// import Navbar from "@/components/Navbar";
-// import PostPage from "@/components/Post";
 import PricingCard from "@/components/PricingCard";
 import FeatureCard from "@/components/FeatureCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Footer from "@/components/Footer";
-
-import {
-  LineChart,
-  Image as ImageIcon,
-  Code2,
-  Sparkles,
-  LayoutTemplate,
-  Share2,
-  Github,
-} from "lucide-react";
+import { Github } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { features } from "@/data";
+import { Link } from "react-router-dom";
+import { useAuthStore } from "@/store/AuthStore";
+
 const Home = () => {
-  const features = [
-    {
-      icon: ImageIcon,
-      title: "OG Image Generation",
-      description:
-        "Create stunning social media preview images with our customizable templates and real-time preview.",
-    },
-    {
-      icon: Code2,
-      title: "Meta Tag Generator",
-      description:
-        "Generate SEO-friendly meta tags automatically for better social sharing and improved visibility.",
-    },
-    {
-      icon: LayoutTemplate,
-      title: "Template Library",
-      description:
-        "Access our growing collection of professional templates or create your own custom designs.",
-    },
-    {
-      icon: LineChart,
-      title: "Analytics Dashboard",
-      description:
-        "Track your OG image performance and social media engagement with detailed insights.",
-    },
-    {
-      icon: Sparkles,
-      title: "AI Enhancement",
-      description:
-        "Leverage AI to automatically optimize your images for different social platforms.",
-    },
-    {
-      icon: Share2,
-      title: "Easy Integration",
-      description:
-        "Simple API integration with your existing workflow and popular frameworks.",
-    },
-  ];
+  const { isLoggedIn } = useAuthStore();
   return (
     <>
       <Navbar />
@@ -74,16 +30,20 @@ const Home = () => {
             across all platforms.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Button className="bg-purple-600 hover:bg-purple-700 px-8 py-6 text-lg">
-              Start Creating for Free
-            </Button>
-            <Button
-              variant="outline"
-              className="border-gray-700 hover:border-purple-500 px-8 py-6 text-lg"
-            >
-              <Github className="mr-2 h-5 w-5" />
-              Star on GitHub
-            </Button>
+            <Link to={isLoggedIn ? "dashboard" : "login"}>
+              <Button className="bg-purple-600 hover:bg-purple-700 px-8 py-6 text-lg">
+                Start Creating for Free
+              </Button>
+            </Link>
+            <Link to="https://github.com/uddinArsalan/DynamicOG">
+              <Button
+                variant="outline"
+                className="border-gray-700 hover:border-purple-500 px-8 py-6 text-lg"
+              >
+                <Github className="mr-2 h-5 w-5" />
+                Star on GitHub
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -168,9 +128,7 @@ const Home = () => {
               ]}
             />
           </div>
-          
         </div>
-        
       </div>
       <Footer />
     </>

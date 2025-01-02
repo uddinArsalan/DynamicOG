@@ -28,7 +28,12 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <div className="flex space-x-6">
+            
+
+            {isLoggedIn ? (
+              // <Link to="/login">
+              <>
+              <div className="flex space-x-6">
               {navItems.map((item) => (
                 <Link
                   key={item.label}
@@ -39,9 +44,6 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
-
-            {isLoggedIn ? (
-              // <Link to="/login">
               <Button
                 variant="ghost"
                 className="text-gray-300 hover:text-purple-500 transition-colors"
@@ -49,6 +51,7 @@ export default function Navbar() {
               >
                 Logout
               </Button>
+              </>
             ) : (
               // </Link>
               <div className="flex items-center space-x-3">

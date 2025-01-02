@@ -1,10 +1,19 @@
-import { Router } from 'express';
+import { Router } from "express";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { DeleteUserOGPostController, GetUserOGPostsController } from "../controllers/post.controller.js";
 
 const router = Router();
 
-router.get('/', ()=> {});
-router.get('/:id', ()=> {});
-router.post('/', ()=> {});
-router.post('/:id', ()=> {});
+//Get All User OG Posts
+router.get("/", verifyJWT, GetUserOGPostsController);
+
+// Get specific user og post
+router.get("/:id", () => {});
+
+// create post(not required)
+router.post("/", () => {});
+
+//delete
+router.delete("/:id", verifyJWT,DeleteUserOGPostController);
 
 export default router;

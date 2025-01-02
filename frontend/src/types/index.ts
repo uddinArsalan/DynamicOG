@@ -12,7 +12,7 @@ export interface UserRegisterData extends UserLoginData {
 export type UserBasicDetails = Omit<UserRegisterData, "password">;
 
 export interface User {
-  userInfo: UserBasicDetails | null;
+  userInfo: UserBasicDetails & {socialLinks? : SocialLinksType[]} | null ;
   isLoading: boolean;
   isLoggedIn: boolean;
   setUserInfo: (userInfo: UserBasicDetails | null) => void;
@@ -20,6 +20,7 @@ export interface User {
   login: ({ email, password }: UserLoginData) => Promise<void>;
   register: ({ name, email, password }: UserRegisterData) => Promise<void>;
   logout: () => Promise<void>;
+  updateSocialLink : (socialLinkPayload : SocialLinksType) => Promise<void>
 }
 
 export type LoginErrorType =
@@ -50,9 +51,17 @@ export interface Template {
   jsx: string;
 }
 
-type PLATFORM = 'twitter'| 'linkedin'|'reddit'|'threads'
+export type PLATFORM = 'twitter'| 'linkedin'|'reddit'|'threads'
 
 export interface SocialLinksType{
-  platform : PLATFORM,
-  url : string
+  platform : PLATFORM;
+  url : string;
+}
+
+export interface BasicOGPostDetails {
+  _id : string;
+  title : string;
+  content : string;
+  ogImageUrl : string;
+  createdAt : string;
 }

@@ -33,3 +33,54 @@ export const templatesDefaultData = [
       "Expand your professional network and discover new opportunities in the ever-evolving tech industry. Learn strategies for effective networking and personal branding.",
   },
 ];
+
+import {
+  LineChart,
+  Image as ImageIcon,
+  Code2,
+  Sparkles,
+  LayoutTemplate,
+  Share2,
+} from "lucide-react";
+
+export const features = [
+  {
+    icon: ImageIcon,
+    title: "OG Image Generation",
+    description:
+      "Create stunning social media preview images with our customizable templates and real-time preview.",
+  },
+  {
+    icon: Code2,
+    title: "Meta Tag Generator",
+    description:
+      "Generate SEO-friendly meta tags automatically for better social sharing and improved visibility.",
+  },
+  {
+    icon: LayoutTemplate,
+    title: "Template Library",
+    description:
+      "Access our growing collection of professional templates or create your own custom designs.",
+  },
+  {
+    icon: LineChart,
+    title: "Analytics Dashboard",
+    timeline : "Coming Soon",
+    description:
+      "Track your OG image performance and social media engagement with detailed insights.",
+  },
+  {
+    icon: Sparkles,
+    title: "AI Enhancement",
+    timeline : "Coming Soon",
+    description:
+      "Leverage AI to automatically optimize your images for different social platforms.",
+  },
+  {
+    icon: Share2,
+    title: "Easy Integration",
+    timeline : "Coming Soon",
+    description:
+      "Simple API integration with your existing workflow and popular frameworks.",
+  },
+]; 

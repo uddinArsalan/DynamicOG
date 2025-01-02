@@ -1,10 +1,15 @@
-import { User } from "@/types";
+import { SocialLinksType, User } from "@/types";
 import { create } from "zustand";
 import { userService } from "../services/user.services";
 
 const initialState: Omit<
   User,
-  "login" | "logout" | "register" | "setUserInfo" | "setLoggedIn"
+  | "login"
+  | "logout"
+  | "register"
+  | "setUserInfo"
+  | "setLoggedIn"
+  | "updateSocialLink"
 > = {
   userInfo: null,
   isLoading: false,
@@ -50,5 +55,12 @@ export const useAuthStore = create<User>()((set) => ({
   logout: async () => {
     await userService.logoutService();
     set({ ...initialState });
+  },
+  updateSocialLink: async (socialLink: SocialLinksType) => {
+    try {
+      await userService.updateSocialLinks(socialLink);
+    } catch (error) {
+      console.log(error);
+    }
   },
 }));

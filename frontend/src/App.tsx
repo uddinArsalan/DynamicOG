@@ -1,6 +1,6 @@
 import React from "react";
 import AppProvider from "./contexts/AppProvider";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import TemplatesSection from "./pages/TemplatesSection";
@@ -20,6 +20,10 @@ function App() {
       path: "/dashboard",
       element: <Dashboard />,
       children: [
+        {
+          index: true, 
+          element: <Navigate to="profile" replace />, 
+        },
         {
           path: "templates",
           element: <TemplatesSection />,

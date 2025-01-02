@@ -1,5 +1,5 @@
 import axios from "@/axios/axiosInstance";
-import { UserLoginData, UserRegisterData } from "@/types";
+import { SocialLinksType, UserLoginData, UserRegisterData } from "@/types";
 
 const registerService = ({ name, email, password }: UserRegisterData) => {
   return axios.post(`/auth/register`, {
@@ -17,4 +17,13 @@ const logoutService = () => {
   return axios.post(`/auth/logout`);
 };
 
-export const userService = { loginService, registerService, logoutService };
+const updateSocialLinks = (socialLinkPayload : SocialLinksType) => {
+  return axios.post(`/user/addLink`,{socialLinkPayload});
+};
+
+export const userService = {
+  loginService,
+  registerService,
+  logoutService,
+  updateSocialLinks,
+};

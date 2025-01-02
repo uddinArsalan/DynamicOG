@@ -13,7 +13,7 @@ interface IUser extends mongoose.Document {
   name: string;
   email: string;
   password: string;
-  socialLinks? : SocialLinksType
+  socialLinks?: SocialLinksType;
   refreshToken?: string;
 }
 
@@ -26,16 +26,23 @@ interface IUserMethods {
 export type UserModel = mongoose.Model<IUser, {}, IUserMethods>;
 export type UserDocument = mongoose.HydratedDocument<IUser, IUserMethods>;
 
+const defaultSocialLinks = [
+  { platform: "twitter", url: "" },
+  { platform: "linkedin", url: "" },
+  { platform: "reddit", url: "" },
+  { platform: "threads", url: "" },
+];
+
 const socialLinksSchema = new mongoose.Schema({
-  platform : {
-    type : String,
-    enum : ['twitter','linkedin','reddit','threads'],
+  platform: {
+    type: String,
+    enum: ["twitter", "linkedin", "reddit", "threads"],
     // default : 'twitter'
   },
-  url : {
+  url: {
     type: String,
-  }
-})
+  },
+});
 
 const userSchema = new mongoose.Schema<IUser, UserModel, IUserMethods>(
   {
@@ -61,10 +68,10 @@ const userSchema = new mongoose.Schema<IUser, UserModel, IUserMethods>(
     refreshToken: {
       type: String,
     },
-    socialLinks : {
-      type : [socialLinksSchema],
-      required : false
-    }
+    socialLinks: {
+      type: [socialLinksSchema],
+      default: defaultSocialLinks,
+    },
   },
   { timestamps: true }
 );

@@ -1,6 +1,6 @@
 import { Post } from "../models/post.model.js";
 import { User, UserDocument } from "../models/user.model.js";
-import { PostType } from "../types/index.js";
+import { PostType, SocialLinksType } from "../types/index.js";
 import { Templates } from "../models/templates.model.js";
 import { ApiError } from "../utils/ApiError.js";
 
@@ -38,10 +38,36 @@ export async function findByIdAndUpdate(id: string) {
   );
 }
 
+export async function updateSocialLinks(
+  userId: string,
+  socialLinkPayload: SocialLinksType
+) {
+  console.log(socialLinkPayload)
+  await User.findOneAndUpdate(
+    {
+      _id: userId,
+      "socialLinks.platform": socialLinkPayload.platform,
+    },
+    {
+      $set: { "socialLinks.$.url": socialLinkPayload.url },
+    },
+    { upsert: true }
+  );
+}
+
 export async function createPost(postDetails: PostType) {
   return await Post.create(postDetails);
 }
 
+export async function getPosts(userId: string) {
+  return await Post.find({ author: userId }).select(
+    "-author -template_id -logo_url -imageUrl"
+  );
+}
+
+export async function deletePost(postId: string) {
+  return await Post.findByIdAndDelete(postId);
+}
 
 export async function getUserTemplates(userId: string | null) {
   return await Templates.find({
@@ -49,12 +75,12 @@ export async function getUserTemplates(userId: string | null) {
   });
 }
 
-export async function getTemplateJSX(templateId: string) : Promise<string> {
+export async function getTemplateJSX(templateId: string): Promise<string> {
   const template = await Templates.findById(templateId).select("jsx");
-  if(!template){
-    throw new ApiError(404,"Invalid Template Id")
+  if (!template) {
+    throw new ApiError(404, "Invalid Template Id");
   }
-  return template.jsx
+  return template.jsx;
 }
 
 export async function generateAccessAndRefreshToken(user: UserDocument) {
