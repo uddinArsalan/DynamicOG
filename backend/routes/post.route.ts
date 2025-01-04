@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { DeleteUserOGPostController, GetUserOGPostsController } from "../controllers/post.controller.js";
+import { verifyJWT } from "../middlewares/auth.middleware";
+import { DeleteUserOGPostController, GetUserOGPostsController } from "../controllers/post.controller";
 
 const router = Router();
 

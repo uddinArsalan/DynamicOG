@@ -2,7 +2,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsc",
-		"start": "npm run build && NODE_ENV=production node dist/server.js",
+		"start": "pnpm run build && NODE_ENV=production node dist/server.js",
 		"dev": "nodemon --watch '*.ts' --exec ts-node dist/server.js --trace-warnings",
 		"clean": "rimraf dist"
 	},
