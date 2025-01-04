@@ -6,7 +6,7 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton
+  SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import {
   Tooltip,
@@ -28,7 +28,7 @@ const navItems = [
   { to: "/dashboard/templates", label: "Templates", icon: Edit3 },
   { to: "/dashboard/generate", label: "Generate OG Image", icon: Monitor },
   { to: "/dashboard/posts", label: "All User OG Posts", icon: Clipboard },
-  { to: "/dashboard/profile", label: "Profile", icon: User2 }
+  { to: "/dashboard/profile", label: "Profile", icon: User2 },
 ];
 
 const DashboardSidebar = () => {
@@ -55,10 +55,7 @@ const DashboardSidebar = () => {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={pathname === item.to}
-                    >
+                    <SidebarMenuButton asChild isActive={pathname === item.to}>
                       <Link to={item.to}>
                         <item.icon className="size-4 text-white" />
                         <span className="text-white">{item.label}</span>
