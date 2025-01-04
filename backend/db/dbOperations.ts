@@ -1,8 +1,8 @@
-import { Post } from "../models/post.model";
-import { User, UserDocument } from "../models/user.model";
-import { PostType, SocialLinksType } from "../types/index";
-import { Templates } from "../models/templates.model";
-import { ApiError } from "../utils/ApiError";
+import { Post } from "../models/post.model.js";
+import { User, UserDocument } from "../models/user.model.js";
+import { PostType, SocialLinksType } from "../types/index.js";
+import { Templates } from "../models/templates.model.js";
+import { ApiError } from "../utils/ApiError.js";
 
 interface UserPayloadType {
   name: string;
@@ -42,7 +42,7 @@ export async function updateSocialLinks(
   userId: string,
   socialLinkPayload: SocialLinksType
 ) {
-  console.log(socialLinkPayload)
+  console.log(socialLinkPayload);
   await User.findOneAndUpdate(
     {
       _id: userId,

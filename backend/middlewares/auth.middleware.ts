@@ -1,12 +1,11 @@
 import { Request, NextFunction } from "express";
-import { ApiError } from "../utils/ApiError";
-import { asyncHandler } from "../utils/asyncHandler";
-import { verifyAccessToken } from "../utils/authUtils";
-import { findUserById } from "../db/DbOperations";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { verifyAccessToken } from "../utils/authUtils.js";
+import { findUserById } from "../db/DbOperations.js";
 
 export const verifyJWT = asyncHandler(
   async (req: Request, _, next: NextFunction) => {
-
     try {
       const token =
         req.cookies.accessToken ||

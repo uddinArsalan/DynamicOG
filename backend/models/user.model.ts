@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { SocialLinksType } from "../types/index";
+import { SocialLinksType } from "../types/index.js";
 import {
   ACCESS_TOKEN_SECRET,
   ACCESS_TOKEN_EXPIRY,
   REFRESH_TOKEN_EXPIRY,
   REFRESH_TOKEN_SECRET,
-} from "../constants";
+} from "../constants.js";
 
 interface IUser extends mongoose.Document {
   name: string;

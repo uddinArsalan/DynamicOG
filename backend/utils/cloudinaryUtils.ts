@@ -1,7 +1,7 @@
 import { UploadApiResponse } from "cloudinary";
-import cloudinary from "../config/cloudinary";
+import cloudinary from "../config/cloudinary.js";
 import { promises as fs } from "fs";
-import { ApiError } from "./ApiError";
+import { ApiError } from "./ApiError.js";
 
 export async function cloudinaryUploadImage(
   image: string | Buffer ,path : string

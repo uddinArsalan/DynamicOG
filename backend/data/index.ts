@@ -1,7 +1,8 @@
-import GeneralTemplate from "./GeneralTemplate";
-import BlogPostTemplate from "./BlogPostTemplate";
-import LinkedinTemplate from "./LinkedinTemplate";
-import TwitterTemplate from "./TwitterTemplate";
+import GeneralTemplate from "./GeneralTemplate.js";
+import BlogPostTemplate from "./BlogPostTemplate.js";
+import LinkedinTemplate from "./LinkedinTemplate.js";
+import TwitterTemplate from "./TwitterTemplate.js";
+
 const templatesJsonData = [
   {
     name: "GeneralTemplate",

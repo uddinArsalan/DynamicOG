@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { verifyJWT } from "../middlewares/auth.middleware";
-import { DeleteUserOGPostController, GetUserOGPostsController } from "../controllers/post.controller";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
+import {
+  DeleteUserOGPostController,
+  GetUserOGPostsController,
+} from "../controllers/post.controller.js";
 
 const router = Router();
 
@@ -14,6 +17,6 @@ router.get("/:id", () => {});
 router.post("/", () => {});
 
 //delete
-router.delete("/:id", verifyJWT,DeleteUserOGPostController);
+router.delete("/:id", verifyJWT, DeleteUserOGPostController);
 
 export default router;

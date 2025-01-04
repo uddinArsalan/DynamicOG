@@ -1,10 +1,10 @@
 import { Router } from "express";
-import ogImage from "./OgImage.route";
-import postRoute from "./post.route";
-import uploadRoute from "./upload.route";
-import authRouter from "./auth.route";
-import userRouter from "./user.route";
-import templatesRouter from "./templates.route";
+import ogImage from "./OgImage.route.js";
+import postRoute from "./post.route.js";
+import uploadRoute from "./upload.route.js";
+import authRouter from "./auth.route.js";
+import userRouter from "./user.route.js";
+import templatesRouter from "./templates.route.js";
 
 const router = Router();
 

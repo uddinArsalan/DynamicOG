@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { asyncHandler } from "../utils/asyncHandler";
-import { PostType } from "../types/index";
-import { createPost, deletePost, getPosts } from "../db/DbOperations";
-import { ApiResponse } from "../utils/ApiResponse";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { PostType } from "../types/index.js";
+import { createPost, deletePost, getPosts } from "../db/DbOperations.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 export const createPostController = asyncHandler(
   async (req: Request, res: Response) => {
