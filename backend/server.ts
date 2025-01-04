@@ -13,7 +13,10 @@ const app = express();
 app.use(json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:
+      process.env.NODE_ENV == "development"
+        ? "http://localhost:5173"
+        : "https://dynamic-og-alpha.vercel.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
