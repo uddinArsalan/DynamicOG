@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { cloudinaryUploadImage } from "../utils/cloudinaryUtils.js";
+import { cloudinaryUploadImage } from "../utils/cloudinaryUtils";
 import { unlinkSync, existsSync } from "fs";
-import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse";
 import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler";
 export const uploadFileController = asyncHandler(
   async (req: Request, res: Response) => {
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
@@ -26,7 +26,11 @@ export const uploadFileController = asyncHandler(
       return res
         .status(200)
         .json(
-          new ApiResponse(201, {uploadResults}, "Files uploaded to cloudinary")
+          new ApiResponse(
+            201,
+            { uploadResults },
+            "Files uploaded to cloudinary"
+          )
         );
     } catch (error) {
       // Delete any remaining files from the server

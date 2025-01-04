@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/asyncHandler";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { updateSocialLinks } from "../db/DbOperations.js";
+import { updateSocialLinks } from "../db/DbOperations";
 
 export const getUserInfo = asyncHandler(async (req: Request, res: Response) => {
   return res.status(200).json(new ApiResponse(201, { user: req.user }));

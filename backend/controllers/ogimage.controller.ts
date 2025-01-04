@@ -1,9 +1,9 @@
-import { generate } from "../services/OgImageGenerator.js";
-import { saveAndUpload } from "../services/ImageStorage.js";
+import { generate } from "../services/OgImageGenerator";
+import { saveAndUpload } from "../services/ImageStorage";
 import { Request, Response } from "express";
-import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError";
+import { asyncHandler } from "../utils/asyncHandler";
+import { ApiResponse } from "../utils/ApiResponse";
 
 export const generateOGImage = asyncHandler(
   async (req: Request, res: Response) => {

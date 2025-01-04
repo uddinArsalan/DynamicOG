@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../constants.js";
+import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../constants";
 
 interface DecodedTokenType extends jwt.JwtPayload {
   _id: string;

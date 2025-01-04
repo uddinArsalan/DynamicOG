@@ -1,8 +1,8 @@
 import { Request, NextFunction } from "express";
-import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { verifyAccessToken } from "../utils/authUtils.js";
-import { findUserById } from "../db/DbOperations.js";
+import { ApiError } from "../utils/ApiError";
+import { asyncHandler } from "../utils/asyncHandler";
+import { verifyAccessToken } from "../utils/authUtils";
+import { findUserById } from "../db/DbOperations";
 
 export const verifyJWT = asyncHandler(
   async (req: Request, _, next: NextFunction) => {
