@@ -3,7 +3,7 @@
 	"scripts": {
 		"build": "rimraf dist && tsc",
 		"start": "NODE_ENV=production node dist/server.js",
-		"dev": "nodemon --watch './**/*.ts' dist/server.js",
+		"dev": "pnpm run build && nodemon dist/server.js",
 		"clean": "rimraf dist"
 	},
 	"dependencies": {

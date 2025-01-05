@@ -6,21 +6,19 @@ import "dotenv/config";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
-// import { feedTemplatesModel } from "./scripts/index.js";
 
 const app = express();
 
 app.use(json());
+console.log(process.env.ALLOWED_ORIGIN);
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV == "development"
-        ? "http://localhost:5173"
-        : "https://dynamic-og-alpha.vercel.app/",
+    origin: process.env.ALLOWED_ORIGIN,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api", routes);
