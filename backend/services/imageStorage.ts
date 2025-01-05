@@ -1,6 +1,6 @@
-import { cloudinaryUploadImage } from "../utils/cloudinaryUtils.js";
-import { PostType } from "../types/index.js";
-import { createPost } from "../db/DbOperations.js";
+import { cloudinaryUploadImage } from "../utils/cloudinaryUtils";
+import { PostType } from "../types/index";
+import { createPost } from "../db/DbOperations";
 
 type PostDetails = PostType & {
   image: string | Buffer;

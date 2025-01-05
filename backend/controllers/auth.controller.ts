@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { registerValidator, loginValidator } from "../validations/schema.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
-import { authService } from "../services/AuthService.js";
-import { COOKIE_OPTIONS } from "../config/cookieConfig.js";
+import { registerValidator, loginValidator } from "../validations/schema";
+import { asyncHandler } from "../utils/asyncHandler";
+import { ApiResponse } from "../utils/ApiResponse";
+import { authService } from "../services/AuthService";
+import { COOKIE_OPTIONS } from "../config/cookieConfig";
 
 export const registerUser = asyncHandler(
   async (req: Request, res: Response) => {

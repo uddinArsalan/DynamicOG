@@ -3,10 +3,10 @@ import {
   createUser,
   findUserById,
   findByIdAndUpdate,
-} from "../db/DbOperations.js";
-import { generateAccessAndRefreshToken } from "../db/DbOperations.js";
-import { ApiError } from "../utils/ApiError.js";
-import { verifyRefreshToken } from "../utils/authUtils.js";
+} from "../db/DbOperations";
+import { generateAccessAndRefreshToken } from "../db/DbOperations";
+import { ApiError } from "../utils/ApiError";
+import { verifyRefreshToken } from "../utils/authUtils";
 
 export const authService = {
   async registerUser(name: string, email: string, password: string) {

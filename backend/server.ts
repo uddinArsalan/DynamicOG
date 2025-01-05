@@ -1,11 +1,11 @@
 import express, { json, urlencoded } from "express";
-import config from "./config/config.js";
-import routes from "./routes/index.js";
-import connectDB from "./db/index.js";
+import config from "./config/config";
+import routes from "./routes/index";
+import connectDB from "./db/index";
 import "dotenv/config";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { errorHandler } from "./middlewares/errorMiddleware.js";
+import { errorHandler } from "./middlewares/errorMiddleware";
 
 const app = express();
 
