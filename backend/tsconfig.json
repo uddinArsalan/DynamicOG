@@ -1,19 +1,25 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "target": "ES6",
-    "module": "Node16",
-    "moduleResolution": "node16",
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "./dist",
     "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "typeRoots": ["./node_modules/@types", "./types"]
+    "allowJs": true,
+    "resolveJsonModule": true
   },
-  "include": ["./**/*.ts", "./**/*.tsx"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "exclude": ["node_modules", "dist"]
 }
-

@@ -1,9 +1,9 @@
 {
 	"type": "module",
 	"scripts": {
-		"build": "tsc",
-		"start": "pnpm run build && NODE_ENV=production node dist/server.js",
-		"dev": "nodemon --watch '*.ts' --exec ts-node dist/server.js --trace-warnings",
+		"build": "rimraf dist && tsc",
+		"start": "NODE_ENV=production node dist/server.js",
+		"dev": "nodemon --watch './**/*.ts' dist/server.js",
 		"clean": "rimraf dist"
 	},
 	"dependencies": {
@@ -43,5 +43,8 @@
 		"patchedDependencies": {
 			"react-jsx-parser": "patches/react-jsx-parser.patch"
 		}
+	},
+	"engines": {
+		"node": ">=18.0.0"
 	}
 }
