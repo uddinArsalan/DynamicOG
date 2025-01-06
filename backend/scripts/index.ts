@@ -1,5 +1,5 @@
-import { Templates } from "../models/templates.model";
-import templatesJsonData from "../data/index";
+import { Templates } from "../models/templates.model.ts";
+import templatesJsonData from "../data/index.ts";
 
 export async function feedTemplatesModel() {
   await Promise.all(

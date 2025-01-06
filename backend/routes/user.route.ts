@@ -2,8 +2,8 @@ import { Router } from "express";
 import {
   getUserInfo,
   updateLinkController,
-} from "../controllers/user.controller";
-import { verifyJWT } from "../middlewares/auth.middleware";
+} from "../controllers/user.controller.ts";
+import { verifyJWT } from "../middlewares/auth.middleware.ts";
 
 const router = Router();
 

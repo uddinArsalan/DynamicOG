@@ -3,10 +3,10 @@ import {
   createUser,
   findUserById,
   findByIdAndUpdate,
-} from "../db/DbOperations";
-import { generateAccessAndRefreshToken } from "../db/DbOperations";
-import { ApiError } from "../utils/ApiError";
-import { verifyRefreshToken } from "../utils/authUtils";
+  generateAccessAndRefreshToken,
+} from "../db/DbOperations.ts";
+import { ApiError } from "../utils/ApiError.ts";
+import { verifyRefreshToken } from "../utils/authUtils.ts";
 
 export const authService = {
   async registerUser(name: string, email: string, password: string) {
