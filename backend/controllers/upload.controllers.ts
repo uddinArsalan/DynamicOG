@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import { cloudinaryUploadImage } from "../utils/cloudinaryUtils.ts";
+import { cloudinaryUploadImage } from "../utils/cloudinaryUtils.js";
 import { unlinkSync, existsSync } from "fs";
-import { ApiResponse } from "../utils/ApiResponse.ts";
-import { ApiError } from "../utils/ApiError.ts";
-import { asyncHandler } from "../utils/asyncHandler.ts";
-
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const uploadFileController = asyncHandler(
   async (req: Request, res: Response) => {

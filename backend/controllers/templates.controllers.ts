@@ -1,8 +1,8 @@
 import { Response } from "express";
-import { asyncHandler } from "../utils/asyncHandler.ts";
-import { getUserTemplates } from "../db/DbOperations.ts";
-import { ApiResponse } from "../utils/ApiResponse.ts";
-import { ApiError } from "../utils/ApiError.ts";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { getUserTemplates } from "../db/db-ops.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
 
 export const getAllTemplates = asyncHandler(async (req, res: Response) => {
   if (!req.user) {

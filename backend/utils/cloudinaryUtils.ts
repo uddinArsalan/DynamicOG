@@ -1,10 +1,11 @@
 import { UploadApiResponse } from "cloudinary";
-import cloudinary from "../config/cloudinary.ts";
+import cloudinary from "../config/cloudinary.js";
 import { promises as fs } from "fs";
-import { ApiError } from "./ApiError.ts";
+import { ApiError } from "./ApiError.js";
 
 export async function cloudinaryUploadImage(
-  image: string | Buffer ,path : string
+  image: string | Buffer,
+  path: string
 ) {
   let imageBuffer: Buffer;
   if (Buffer.isBuffer(image)) {
@@ -12,7 +13,7 @@ export async function cloudinaryUploadImage(
   } else if (typeof image === "string") {
     imageBuffer = await fs.readFile(image);
   } else {
-    throw new ApiError(404,"Unexpected result type");
+    throw new ApiError(404, "Unexpected result type");
   }
   try {
     const uploadResult: UploadApiResponse | undefined = await new Promise(
@@ -30,7 +31,7 @@ export async function cloudinaryUploadImage(
     );
 
     return uploadResult?.secure_url;
-  } catch (error : unknown ) {
+  } catch (error: unknown) {
     console.error("Error generating or uploading image:", error);
   }
 }

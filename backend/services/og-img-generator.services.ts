@@ -1,5 +1,5 @@
-import { getTemplateJSX } from "../db/DbOperations.ts";
-import OGImageTemplate from "../utils/getJsx";
+import { getTemplateJSX } from "../db/db-ops.js";
+import OGImageTemplate from "../utils/getJsx.js";
 import { ImageResponse } from "@vercel/og";
 import { html } from "satori-html";
 import React from "react";

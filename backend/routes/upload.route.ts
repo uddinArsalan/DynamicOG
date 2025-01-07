@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { upload } from "../middlewares/multer.middleware.ts";
-import { uploadFileController } from "../controllers/upload.controller.ts";
+import { upload } from "../middlewares/multer.middleware.js";
+import { uploadFileController } from "../controllers/upload.controllers.js";
 
 const router = Router();
 

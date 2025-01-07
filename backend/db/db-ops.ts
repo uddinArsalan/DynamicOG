@@ -1,8 +1,8 @@
-import { Post } from "../models/post.model.ts";
-import { User, UserDocument } from "../models/user.model.ts";
-import { PostType, SocialLinksType } from "../types/index.ts";
-import { Templates } from "../models/templates.model.ts";
-import { ApiError } from "../utils/ApiError.ts";
+import { Post } from "../models/post.model.js";
+import { User, UserDocument } from "../models/user.model.js";
+import { PostType, SocialLinksType } from "../types/index.js";
+import { Templates } from "../models/templates.model.js";
+import { ApiError } from "../utils/ApiError.js";
 
 interface UserPayloadType {
   name: string;

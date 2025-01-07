@@ -4,9 +4,9 @@ import {
   findUserById,
   findByIdAndUpdate,
   generateAccessAndRefreshToken,
-} from "../db/DbOperations.ts";
-import { ApiError } from "../utils/ApiError.ts";
-import { verifyRefreshToken } from "../utils/authUtils.ts";
+} from "../db/db-ops.js";
+import { ApiError } from "../utils/ApiError.js";
+import { verifyRefreshToken } from "../utils/authUtils.js";
 
 export const authService = {
   async registerUser(name: string, email: string, password: string) {

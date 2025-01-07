@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { errors } from "@vinejs/vine";
-import { ApiError } from "../utils/ApiError.ts";
+import { ApiError } from "../utils/ApiError.js";
 
 export const errorHandler = (
   err: Error,
