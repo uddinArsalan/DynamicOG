@@ -16,6 +16,7 @@ import { useAuthStore } from "@/store/AuthStore";
 import { UserLoginData } from "@/types";
 import { loginSchema } from "@/schemas";
 import { parseLoginFieldErrors } from "@/lib";
+import axios from "axios";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -58,11 +59,14 @@ export default function LoginPage() {
       });
       navigate("/", { replace: true });
     } catch (err) {
-      console.log(err);
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        emailError: ["Login failed. Please check your credentials."],
-      }));
+      if (axios.isAxiosError(err)) {
+        console.log(err?.response?.data.message);
+        setErrors(() => ({
+          emailError: [],
+          passwordError: [],
+          nameError: [err?.response?.data.message],
+        }));
+      }
     }
   }
 
@@ -120,7 +124,7 @@ export default function LoginPage() {
                 autoCorrect="off"
                 onChange={handleChange}
                 disabled={isLoading}
-                className="border-gray-800 bg-gray-900 focus:border-purple-500 focus:ring-purple-500/20"
+                className="border-gray-800 text-white bg-gray-900 focus:border-purple-500 focus:ring-purple-500/20"
               />
               {errors.emailError?.map((error, index) => (
                 <p key={index} className="text-sm text-red-400" role="alert">
@@ -140,7 +144,7 @@ export default function LoginPage() {
                 placeholder="***********"
                 onChange={handleChange}
                 disabled={isLoading}
-                className="border-gray-800 bg-gray-900 focus:border-purple-500 focus:ring-purple-500/20"
+                className="border-gray-800 bg-gray-900 focus:border-purple-500 focus:ring-purple-500/20 text-white"
               />
               {errors.passwordError?.map((error, index) => (
                 <p key={index} className="text-sm text-red-400" role="alert">

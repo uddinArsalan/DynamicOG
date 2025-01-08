@@ -20,7 +20,6 @@ axiosInstance.interceptors.response.use(
         );
         return axiosInstance(originalRequest);
       } catch {
-        console.log("location");
         return Promise.reject(error);
       }
     }

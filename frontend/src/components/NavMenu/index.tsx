@@ -18,9 +18,9 @@ import {
   ExternalLink,
   ChevronRight,
   LayoutDashboard,
-  BookOpenIcon,
-  Code2,
-  Settings,
+  // BookOpenIcon,
+  // Code2,
+  // Settings,
   Github,
 } from "lucide-react";
 
@@ -44,13 +44,13 @@ const NavMenu = () => {
       title: "Getting Started",
       items: [
         { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
-        {
-          label: "Documentation",
-          icon: BookOpenIcon,
-          href: "/docs",
-          external: true,
-        },
-        { label: "API Reference", icon: Code2, href: "/api" },
+        // {
+        //   label: "Documentation",
+        //   icon: BookOpenIcon,
+        //   href: "/docs",
+        //   external: true,
+        // },
+        // { label: "API Reference", icon: Code2, href: "/api" },
       ],
     },
     {
@@ -58,7 +58,7 @@ const NavMenu = () => {
       items: [
         { label: "Login", icon: LogIn, href: "/login" },
         { label: "Sign Up", icon: UserPlus, href: "/signup" },
-        { label: "Settings", icon: Settings, href: "/settings" },
+        // { label: "Settings", icon: Settings, href: "/settings" },
       ],
     },
   ];
@@ -67,17 +67,16 @@ const NavMenu = () => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button
-          variant="ghost"
           size="icon"
-          className="md:hidden relative group"
+          className="bg-inherit hover:bg-gray-100  text-gray-100  hover:text-black md:hidden relative"
         >
-          <Menu className="h-5 w-5 text-gray-300 group-hover:text-white transition-colors" />
+          <Menu className="h-5 w-5 " />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="w-80 p-0 bg-gray-950 border-gray-800"
+        className="w-80 border-none text-white p-0 bg-gray-950 border-gray-800"
       >
         <div className="flex flex-col h-full">
           <SheetHeader className="border-b border-gray-800 p-6">
@@ -113,10 +112,12 @@ const NavMenu = () => {
                 variant="ghost"
                 className="w-full justify-between text-gray-400 hover:text-white hover:bg-gray-800"
               >
-                <div className="flex items-center">
-                  <Github className="w-5 h-5 mr-3" />
-                  <span>Star on GitHub</span>
-                </div>
+                <Link to="https://github.com/uddinArsalan/DynamicOG">
+                  <div className="flex items-center">
+                    <Github className="w-5 h-5 mr-3" />
+                    <span>Star on GitHub</span>
+                  </div>
+                </Link>
                 <ChevronRight className="w-4 h-4" />
               </Button>
             </div>

@@ -12,7 +12,6 @@ export default function Navbar() {
     <nav className="fixed w-full z-50 border-b border-gray-700 bg-gray-900/90 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo and Brand */}
           <div className="flex items-center space-x-3">
             <Link to="/" className="flex items-center space-x-2">
               <div className="p-2 bg-purple-500 rounded-lg">
@@ -26,7 +25,6 @@ export default function Navbar() {
             </p>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             
 
@@ -72,7 +70,6 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <NavMenu />
           </div>
