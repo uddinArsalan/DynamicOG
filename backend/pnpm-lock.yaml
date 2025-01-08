@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   react-jsx-parser:
-    hash: vf342554rzkhaua4vyidvv7yvq
+    hash: ewoiscxlgexc235gitqqntqy4u
     path: patches/react-jsx-parser.patch
 
 importers:
@@ -54,7 +54,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       react-jsx-parser:
         specifier: ^2.2.2
-        version: 2.2.2(patch_hash=vf342554rzkhaua4vyidvv7yvq)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 2.2.2(patch_hash=ewoiscxlgexc235gitqqntqy4u)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       satori-html:
         specifier: ^0.3.2
         version: 0.3.2
@@ -2385,7 +2385,7 @@ snapshots:
       react: 19.0.0
       scheduler: 0.25.0
 
-  react-jsx-parser@2.2.2(patch_hash=vf342554rzkhaua4vyidvv7yvq)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-jsx-parser@2.2.2(patch_hash=ewoiscxlgexc235gitqqntqy4u)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       acorn: 8.14.0
       acorn-jsx: 5.3.2(acorn@8.14.0)
