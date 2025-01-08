@@ -19,6 +19,7 @@ export const registerUser = asyncHandler(
 );
 
 export const loginUser = asyncHandler(async (req: Request, res: Response) => {
+  console.log("Request here Login Controller");
   const { email, password } = await loginValidator.validate(req.body);
 
   const { accessToken, refreshToken, user } = await authService.loginUser(

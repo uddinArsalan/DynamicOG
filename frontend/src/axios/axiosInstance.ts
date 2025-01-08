@@ -6,6 +6,8 @@ const axiosInstance = axios.create({
   baseURL: API_URL,
 });
 
+console.log(API_URL);
+
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
