@@ -35,7 +35,7 @@ const DashboardSidebar = () => {
   const { pathname } = useLocation();
 
   return (
-    <Sidebar collapsible="icon" className="top-16 dark border-r lg:top-[64px]">
+    <Sidebar collapsible="offcanvas" className="top-16 dark border-r lg:top-[64px]">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

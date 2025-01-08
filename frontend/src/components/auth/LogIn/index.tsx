@@ -57,7 +57,7 @@ export default function LoginPage() {
         emailError: [],
         passwordError: [],
       });
-      navigate("/", { replace: true });
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       if (axios.isAxiosError(err)) {
         console.log(err?.response?.data.message);

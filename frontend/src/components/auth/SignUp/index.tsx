@@ -60,7 +60,7 @@ export default function SignupPage() {
 
     try {
       await register(data);
-      navigate("/", { replace: true });
+      navigate("/dashboard", { replace: true });
       setErrors({
         nameError: [],
         emailError: [],
