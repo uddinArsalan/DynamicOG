@@ -28,71 +28,78 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%; */
     --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-muted: 240 5% 64.9%;
+    --sidebar-muted-foreground: 240 5% 84.9%;
+    --sidebar-hover: 240 5% 15.9%;
+    --sidebar-hover-foreground: 0 0% 100%;
   }
   .dark {
-    /* Keeping the main dark background with a slight purple tinge */
     --background: 250 10% 3.9%;
     --foreground: 0 0% 98%;
 
-    /* Card and popover with deep purple undertones */
     --card: 250 10% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 250 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    /* Primary colors */
-    --primary: 250 95% 65%; /* Vibrant purple */
+    --primary: 250 95% 65%; 
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary with purple tint */
     --secondary: 250 15% 15.9%;
     --secondary-foreground: 0 0% 98%;
 
-    /* Muted purple tones */
     --muted: 250 10% 15.9%;
     --muted-foreground: 250 5% 64.9%;
 
-    /* Accent colors with purple */
     --accent: 250 30% 20%;
     --accent-foreground: 0 0% 98%;
 
-    /* Keeping destructive red */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Border and input with purple undertones */
     --border: 250 15% 15.9%;
     --input: 250 15% 15.9%;
     --ring: 250 95% 65%;
 
-    /* Chart colors */
     --chart-1: 250 70% 50%; /* Purple */
     --chart-2: 280 60% 45%; /* Deep Purple */
     --chart-3: 220 80% 55%; /* Blue-Purple */
     --chart-4: 300 65% 60%; /* Magenta-Purple */
     --chart-5: 260 75% 55%; /* Violet */
 
-    /* Sidebar specific colors */
-    --sidebar-background: 250 15% 8%; /* Dark purple-tinted background */
-    --sidebar-foreground: 0 0% 100%;
+    /* --sidebar-background: 250 15% 8%; 
+    --sidebar-foreground: 0 0% 100%; */
     --sidebar-primary: 250 95% 65%; /* Matching primary purple */
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 250 30% 20%; /* Darker purple accent */
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 250 15% 15.9%;
     --sidebar-ring: 250 95% 65%; /* Matching ring color */
+    
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-muted: 240 5% 64.9%;
+    --sidebar-muted-foreground: 240 5% 84.9%;
+    --sidebar-hover: 240 5% 25.9%;
+    --sidebar-hover-foreground: 0 0% 100%;
   }
   @layer base {
     * {
       @apply border-border;
+    }
+    .sidebar-item {
+      @apply text-sidebar-foreground transition-colors;
     }
     body {
       @apply bg-background text-foreground;

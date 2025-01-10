@@ -16,7 +16,6 @@ function AppProvider({ children }: { children: React.ReactNode }) {
     async function authenticateUser() {
       try {
         const { data } = await axiosInstance.get("/user");
-        console.log(data.data.user)
         setUserInfo(data.data.user);
         setLoggedIn(true);
       } catch (error) {

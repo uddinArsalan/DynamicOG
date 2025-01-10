@@ -172,6 +172,7 @@ const OGImageForm: React.FC<PostProps> = ({
             <Label htmlFor="title">Title</Label>
             <Input
               id="title"
+              name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter the title of your post"
@@ -182,6 +183,7 @@ const OGImageForm: React.FC<PostProps> = ({
           <Label htmlFor="content">Description</Label>
           <Textarea
             id="content"
+            name="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Enter the description of your post"
