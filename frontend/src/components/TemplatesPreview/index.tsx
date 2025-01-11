@@ -15,8 +15,8 @@ const TemplatePreview = ({
   jsxString,
 }: TemplateDataType) => {
   return (
-    <div className="w-full overflow-hidden">
-      <div className="relative w-full pb-[60%]">
+    <div className="aspect-[5/3] w-full overflow-hidden">
+      <div className="relative w-full h-full">
         <div className="absolute inset-0 scale-[0.4] transform origin-top-left">
           <div className="w-[250%] h-[250%]">
             <JsxParser
