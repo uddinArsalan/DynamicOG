@@ -81,7 +81,7 @@ const OGImageForm: React.FC<PostProps> = ({
       });
 
       if (uploadResponse.status !== 200) {
-        throw new Error(`HTTP error! status: ${uploadResponse.status}`);
+        throw new Error(`Error uploading `);
       }
       return uploadResponse.data.data.uploadResults;
     };
@@ -113,8 +113,8 @@ const OGImageForm: React.FC<PostProps> = ({
             logoUrl: logoUrlRes,
           });
 
-          if (!(generateResponse.statusText == "OK")) {
-            throw new Error(`HTTP error! status: ${generateResponse.status}`);
+          if (generateResponse.status !== 200) {
+            throw new Error(`Error generating `);
           }
 
           const ogImageUrl = generateResponse.data.data.ogImageUrl;
