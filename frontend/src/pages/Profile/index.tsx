@@ -53,12 +53,12 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <Card className="w-full max-w-3xl mx-auto">
-        <CardHeader className="flex flex-row items-center gap-4">
-          <Avatar className="w-20 h-20">
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+      <Card className="w-full max-w-4xl mx-auto">
+        <CardHeader className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+          <Avatar className="w-20 h-20 sm:w-24 sm:h-24">
             <AvatarImage
-              src="/placeholder.svg?height=80&width=80"
+              src="/placeholder.svg?height=96&width=96"
               alt={userInfo?.name}
             />
             <AvatarFallback>
@@ -68,15 +68,17 @@ const ProfilePage = () => {
                 .join("")}
             </AvatarFallback>
           </Avatar>
-          <div>
-            <CardTitle className="text-2xl">{userInfo?.name}</CardTitle>
+          <div className="text-center sm:text-left">
+            <CardTitle className="text-2xl sm:text-3xl">
+              {userInfo?.name}
+            </CardTitle>
             <p className="text-muted-foreground">{userInfo?.email}</p>
           </div>
         </CardHeader>
         <CardContent>
           <form className="space-y-6">
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
                   <Input id="name" value={userInfo?.name} readOnly />
@@ -94,27 +96,31 @@ const ProfilePage = () => {
             </div>
 
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                 <h3 className="text-lg font-semibold">Social Links</h3>
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={addSocialLink}
+                  className="w-full sm:w-auto"
                 >
                   <PlusCircle className="w-4 h-4 mr-2" />
                   Add Link
                 </Button>
               </div>
               {socialLinks.map((link, index) => (
-                <div key={index} className="flex items-center space-x-4">
+                <div
+                  key={index}
+                  className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4"
+                >
                   <Select
                     defaultValue={link.platform}
                     onValueChange={(value) =>
                       handlePlatformChange(index, value as PLATFORM)
                     }
                   >
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger className="w-full sm:w-[180px]">
                       <SelectValue placeholder="Select platform" />
                     </SelectTrigger>
                     <SelectContent>
@@ -124,13 +130,20 @@ const ProfilePage = () => {
                       <SelectItem value="threads">Threads</SelectItem>
                     </SelectContent>
                   </Select>
-                  <Input
-                    placeholder="Enter URL"
-                    value={link.url}
-                    className="flex-grow"
-                    onChange={(e) => handleUrlChange(index, e.target.value)}
-                  />
-                  <Button type="button" size="icon" variant="ghost">
+                  <div className="flex-grow w-full sm:w-auto">
+                    <Input
+                      placeholder="Enter URL"
+                      value={link.url}
+                      className="w-full"
+                      onChange={(e) => handleUrlChange(index, e.target.value)}
+                    />
+                  </div>
+                  <Button
+                    type="button"
+                    size="icon"
+                    variant="ghost"
+                    className="ml-auto sm:ml-0"
+                  >
                     <Pencil className="w-4 h-4" />
                   </Button>
                 </div>

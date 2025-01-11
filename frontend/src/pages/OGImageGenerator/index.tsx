@@ -25,6 +25,7 @@ const OGImageGenerator = () => {
     null
   );
   const [ogImageUrl, setOgImageUrl] = useState<string>("");
+  const [defaultTab,setDefaultTab] = useState("preview");
 
   const metaTags = {
     linkedin: `<meta property="og:title" content="${title}" />
@@ -42,13 +43,15 @@ const OGImageGenerator = () => {
 
   function updateOgImageUrl(url: string) {
     setOgImageUrl(url);
+    setDefaultTab("meta-tags");
   }
   useEffect(() => {
     getTemplates();
   }, []);
   return (
+    <div className="container mx-auto p-4 space-y-6">
     <div className="grid gap-6 lg:grid-cols-2">
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6 overflow-hidden">
         <OGImageForm
           templates={templates}
           title={title}
@@ -63,8 +66,8 @@ const OGImageGenerator = () => {
           selectedTemplate={selectedTemplate}
         />
       </Card>
-      <Card className="p-6">
-        <Tabs defaultValue="preview">
+      <Card className="p-4 sm:p-6">
+        <Tabs defaultValue={defaultTab}>
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="preview">Preview</TabsTrigger>
             <TabsTrigger value="meta-tags">Meta Tags</TabsTrigger>
@@ -90,19 +93,21 @@ const OGImageGenerator = () => {
               <h2 className="text-xl font-semibold mb-4">Copy Meta Tags</h2>
               {Object.entries(metaTags).map(([platform, tags]) => (
                 <div className="relative" key={platform}>
-                  <h3 className="font-semibold capitalize">{platform}</h3>
-                  <pre className="bg-gray-100 p-4 text-sm rounded-md overflow-x-auto">
-                    <code>{tags}</code>
-                  </pre>
-                  <Button
-                    onClick={() => navigator.clipboard.writeText(tags)}
-                    size="icon"
-                    variant="ghost"
-                    className="absolute top-6 right-2"
-                  >
-                    <Copy className="h-4 w-4" />
-                    <span className="sr-only">Copy meta tags</span>
-                  </Button>
+                  <h3 className="font-semibold capitalize mb-2">{platform}</h3>
+                  <div className="relative">
+                    <pre className="bg-muted p-3 rounded-md overflow-x-auto text-sm max-h-40">
+                      <code className="whitespace-pre-wrap break-words">{tags}</code>
+                    </pre>
+                    <Button
+                      onClick={() => navigator.clipboard.writeText(tags)}
+                      size="icon"
+                      variant="ghost"
+                      className="absolute top-1 right-1"
+                    >
+                      <Copy className="h-4 w-4" />
+                      <span className="sr-only">Copy {platform} meta tags</span>
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -110,6 +115,7 @@ const OGImageGenerator = () => {
         </Tabs>
       </Card>
     </div>
+  </div>
   );
 };
 
