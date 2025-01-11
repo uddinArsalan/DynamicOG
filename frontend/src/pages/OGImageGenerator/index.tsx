@@ -67,7 +67,7 @@ const OGImageGenerator = () => {
         />
       </Card>
       <Card className="p-4 sm:p-6">
-        <Tabs defaultValue={defaultTab}>
+        <Tabs defaultValue={defaultTab} value={defaultTab}>
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="preview">Preview</TabsTrigger>
             <TabsTrigger value="meta-tags">Meta Tags</TabsTrigger>
